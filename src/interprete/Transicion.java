@@ -21,10 +21,10 @@ public class Transicion {
         this.estado = estado;
     }
     
-    public Transicion(char minSimb, char maxSimb, Estado estado){
+    public Transicion(char minSimb, char maxSimb, Estado Esta){
         this.minSimb = minSimb;
         this.maxSimb = maxSimb;
-        this.estado = estado;
+        this.estado = Esta;
     }
 
     public char getMinSimb() {
