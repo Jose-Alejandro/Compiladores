@@ -10,5 +10,7 @@ package interprete;
  * @author Fernando
  */
 public class Estado {
+    static int IdEdoAct;
+    int IdEdo;
     
 }
