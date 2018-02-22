@@ -16,6 +16,7 @@ public class Afn {
     ArrayList<String> alfabeto ;
     
     public Afn(char c) {
+        estadosAceptacion = new HashSet();
         alfabeto = new ArrayList();
         alfabeto.add("" + c);
         estadoInicial = new Estado();
