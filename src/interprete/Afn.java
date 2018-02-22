@@ -1,6 +1,7 @@
 
 package interprete;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Stack;
 
@@ -12,10 +13,11 @@ public class Afn {
     
     HashSet<Estado> estadosAceptacion;
     Estado estadoInicial;
-    char[] alfabeto;
+    ArrayList<String> alfabeto ;
     
     public Afn(char c) {
-        alfabeto[0] = c;
+        alfabeto = new ArrayList();
+        alfabeto.add("" + c);
         estadoInicial = new Estado();
         estadosAceptacion.add(new Estado());
         estadosAceptacion.iterator().next().setEstadoTrue();
