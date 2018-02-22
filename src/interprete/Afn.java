@@ -18,6 +18,7 @@ public class Afn {
         alfabeto[0] = c;
         estadoInicial = new Estado();
         estadosAceptacion.add(new Estado());
+        estadosAceptacion.iterator().next().setEstadoTrue();
     }
     
     public HashSet<Estado> cerraduraEpsilon(Estado e) {
