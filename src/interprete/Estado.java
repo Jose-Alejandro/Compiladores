@@ -41,4 +41,15 @@ public class Estado
         return this.Transiciones;
     }
     
+    public void setTransicion(Transicion transicion)
+    {
+        Transiciones.add(transicion);
+    }
+    
+    public void setEstadoTrue()
+    {
+        this.EdoAcept=true;
+    }
+    
+    
 }
