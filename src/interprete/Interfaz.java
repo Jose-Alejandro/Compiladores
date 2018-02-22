@@ -319,6 +319,19 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton3){
             v.setVisible(true);
             v.setTitle("Concatenar AFN's");
+            
+            contenedorTop.setLayout(new GridLayout(1,3));
+            contenedorTop.add(select1);
+            contenedorTop.add(jLabel12);
+            contenedorTop.add(select2);
+            contenedorMiddle.setLayout(new GridLayout(1,2));
+            contenedorMiddle.add(jLabel11);
+            contenedorMiddle.add(select3);
+            
+            v.setLayout(new GridLayout(3,1));
+            v.add(contenedorTop);
+            v.add(contenedorMiddle);
+            v.add(contenedorBottom);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -326,14 +339,23 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton6){
             v.setVisible(true);
             v.setTitle("Operación ?");
+            
+            contenedorTop.setLayout(new GridLayout(1,2));
+            contenedorTop.add(jLabel13);
+            contenedorTop.add(select1);
+            
+            v.setLayout(new GridLayout(2,1));
+            v.add(contenedorTop);
+            v.add(contenedorBottom);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (evt.getSource() == jButton1){            
+        if (evt.getSource() == jButton1){
             v.setVisible(true);
             v.setTitle("Crear AFN básico");                   // colocamos titulo a la ventana
             
+            contenedorVentana.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
             contenedorTop.add(jLabel10);
             contenedorTop.add(jTextField10);
@@ -354,6 +376,14 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton4){
             v.setVisible(true);
             v.setTitle("Operación cerradura +");
+            
+            contenedorTop.setLayout(new GridLayout(1,2));
+            contenedorTop.add(jLabel13);
+            contenedorTop.add(select1);
+            
+            v.setLayout(new GridLayout(2,1));
+            v.add(contenedorTop);
+            v.add(contenedorBottom);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -361,6 +391,14 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton5){
             v.setVisible(true);
             v.setTitle("Operación cerradura *");
+            
+            contenedorTop.setLayout(new GridLayout(1,2));
+            contenedorTop.add(jLabel13);
+            contenedorTop.add(select1);
+            
+            v.setLayout(new GridLayout(2,1));
+            v.add(contenedorTop);
+            v.add(contenedorBottom);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
