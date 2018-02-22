@@ -10,12 +10,15 @@ import java.util.Stack;
  */
 public class Afn {
     
+    HashSet<Estado> estadosAceptacion;
+    Estado estadoInicial;
     public Afn() {
         
     }
     
     HashSet<Estado> cerraduraEpsilon(Estado e) {
         HashSet<Estado> estados = new HashSet();
+        HashSet<Transicion> transiciones;
         Stack<Estado> pila = new Stack();
         Estado estado;
         pila.clear();
@@ -25,7 +28,13 @@ public class Afn {
             if(!estados.contains(estado)) {
                 estados.add(estado);
             }
+            transiciones = estado.getTransiciones();
             //ciclo para verificar si existen transiciones epsilon en el estado
+            for(int i = 0; i < transiciones.size(); i++) {
+                if(transiciones.iterator().next().getMaxSimb() == '\00') {
+                   pila.push(transiciones.iterator().next().getEstado());
+                }
+            }
         }
         return estados;
     }
@@ -40,7 +49,13 @@ public class Afn {
     
     HashSet<Estado> mover(Estado e, char c) {
         HashSet<Estado> estados = new HashSet();
+        HashSet<Transicion> transiciones = e.getTransiciones();
         //Ciclo para obtener transisiones epsilon de los estados
+        for(int  i = 0; i < transiciones.size(); i++) {
+            if(transiciones.iterator().next().getMinSimb() >= c && transiciones.iterator().next().getMaxSimb() <= c) {
+                estados.add(transiciones.iterator().next().getEstado());
+            }
+        }
         return estados;
     }
     
@@ -50,5 +65,24 @@ public class Afn {
             estados.addAll(mover(conjunto.iterator().next(), c));
         }
         return cerraduraEpsilon(estados);
+    }
+    
+    boolean AnalizarCadena(String s) {
+        HashSet<Estado> estados, conjunto;
+        int longitud;
+        estados = cerraduraEpsilon(this.estadoInicial);
+        longitud = s.length();
+        for(int i = 0; i < longitud; i++) {
+            conjunto = irA(estados, s.charAt(i));
+            if(conjunto.isEmpty()) {
+                return false;
+            }
+        }
+        for(int j = 0; j < estadosAceptacion.size(); j++) {
+            if(estados.contains(estadosAceptacion.iterator().next())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
