@@ -349,6 +349,8 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Operación ?");
             
+            v.remove(contenedorMiddle);
+            
             contenedorTop.removeAll();
             contenedorMiddle.removeAll();
             contenedorBottom.removeAll();
@@ -357,6 +359,7 @@ public class Interfaz extends javax.swing.JFrame {
             contenedorTop.add(select1);
             contenedorBottom.setLayout(new GridLayout(1,1));
             contenedorBottom.add(jButton10);
+            
             
             v.setLayout(new GridLayout(2,1));
             v.add(contenedorTop);
@@ -395,6 +398,7 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton4){
             v.setVisible(true);
             v.setTitle("Operación cerradura +");
+            v.remove(contenedorMiddle);
             
             contenedorTop.removeAll();
             contenedorMiddle.removeAll();
@@ -402,6 +406,8 @@ public class Interfaz extends javax.swing.JFrame {
             contenedorTop.setLayout(new GridLayout(1,2));
             contenedorTop.add(jLabel13, BorderLayout.WEST);
             contenedorTop.add(select1);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
             
             v.setLayout(new GridLayout(2,1));
             v.add(contenedorTop);
@@ -413,13 +419,15 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton5){
             v.setVisible(true);
             v.setTitle("Operación cerradura *");
-            
+            v.remove(contenedorMiddle);
             contenedorTop.removeAll();
             contenedorMiddle.removeAll();
             contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
             contenedorTop.add(jLabel13, BorderLayout.WEST);
             contenedorTop.add(select1);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
             
             v.setLayout(new GridLayout(2,1));
             v.add(contenedorTop);
