@@ -90,5 +90,11 @@ public class Afn {
         return false;
     }
     
-    //public void get
+    public Estado getEstadoInicial() { //Retorna el estado inicial del afn
+        return this.estadoInicial;
+    }
+    
+    public HashSet<Estado> getEstadosAceptacion() { //Retorna el conjunto de estados de aceptación del afn
+        return this.estadosAceptacion;
+    }
 }
