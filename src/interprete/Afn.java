@@ -12,11 +12,16 @@ public class Afn {
     
     HashSet<Estado> estadosAceptacion;
     Estado estadoInicial;
-    public Afn() {
-        
+    char[] alfabeto;
+    
+    public Afn(char c) {
+        alfabeto[0] = c;
+        estadoInicial = new Estado();
+        estadosAceptacion.add(new Estado());
+        estadosAceptacion.iterator().next().setEstadoTrue();
     }
     
-    HashSet<Estado> cerraduraEpsilon(Estado e) {
+    public HashSet<Estado> cerraduraEpsilon(Estado e) {
         HashSet<Estado> estados = new HashSet();
         HashSet<Transicion> transiciones;
         Stack<Estado> pila = new Stack();
@@ -39,7 +44,7 @@ public class Afn {
         return estados;
     }
     
-    HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
+    public HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
         HashSet<Estado> estados = new HashSet();
         for(int i = 0; i < conjunto.size(); i++) {
             estados.addAll(cerraduraEpsilon(conjunto.iterator().next()));
@@ -47,7 +52,7 @@ public class Afn {
         return estados;
     }
     
-    HashSet<Estado> mover(Estado e, char c) {
+    public HashSet<Estado> mover(Estado e, char c) {
         HashSet<Estado> estados = new HashSet();
         HashSet<Transicion> transiciones = e.getTransiciones();
         //Ciclo para obtener transisiones epsilon de los estados
@@ -59,7 +64,7 @@ public class Afn {
         return estados;
     }
     
-    HashSet<Estado> irA(HashSet<Estado> conjunto, char c) {
+    public HashSet<Estado> irA(HashSet<Estado> conjunto, char c) {
         HashSet<Estado> estados = new HashSet();
         for(int i = 0; i < conjunto.size(); i++) {
             estados.addAll(mover(conjunto.iterator().next(), c));
@@ -67,7 +72,7 @@ public class Afn {
         return cerraduraEpsilon(estados);
     }
     
-    boolean AnalizarCadena(String s) {
+    public boolean AnalizarCadena(String s) {
         HashSet<Estado> estados, conjunto;
         int longitud;
         estados = cerraduraEpsilon(this.estadoInicial);
@@ -84,5 +89,13 @@ public class Afn {
             }
         }
         return false;
+    }
+    
+    public Estado getEstadoInicial() { //Retorna el estado inicial del afn
+        return this.estadoInicial;
+    }
+    
+    public HashSet<Estado> getEstadosAceptacion() { //Retorna el conjunto de estados de aceptación del afn
+        return this.estadosAceptacion;
     }
 }
