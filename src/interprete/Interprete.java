@@ -18,4 +18,9 @@ public class Interprete {
       System.out.println("Hola mundo");
   }
   
+  public Afn crearBasico(char c) {
+      Afn afn = new Afn(c);
+      //afn.estadoInicial.
+      return afn;
+  }
 }
