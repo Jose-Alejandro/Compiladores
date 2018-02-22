@@ -73,8 +73,7 @@ public class Interfaz extends javax.swing.JFrame {
         contenedorTop =  new JPanel();
         contenedorMiddle =  new JPanel();
         contenedorBottom =  new JPanel();
-        contenedorBottom.setLayout(new GridLayout(1,1));
-        contenedorBottom.add(jButton10);
+        
         
         select1 =  new JComboBox();
         select1.addActionListener(new ActionListener() {
@@ -300,6 +299,9 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Unir AFN's");
             
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,3));
             contenedorTop.add(select1);
             contenedorTop.add(jLabel12);
@@ -307,6 +309,8 @@ public class Interfaz extends javax.swing.JFrame {
             contenedorMiddle.setLayout(new GridLayout(1,2));
             contenedorMiddle.add(jLabel11);
             contenedorMiddle.add(select3);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
             
             v.setLayout(new GridLayout(3,1));
             v.add(contenedorTop);
@@ -320,6 +324,9 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Concatenar AFN's");
             
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,3));
             contenedorTop.add(select1);
             contenedorTop.add(jLabel12);
@@ -327,6 +334,8 @@ public class Interfaz extends javax.swing.JFrame {
             contenedorMiddle.setLayout(new GridLayout(1,2));
             contenedorMiddle.add(jLabel11);
             contenedorMiddle.add(select3);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
             
             v.setLayout(new GridLayout(3,1));
             v.add(contenedorTop);
@@ -340,9 +349,14 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Operación ?");
             
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
-            contenedorTop.add(jLabel13);
+            contenedorTop.add(jLabel13, BorderLayout.WEST);
             contenedorTop.add(select1);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
             
             v.setLayout(new GridLayout(2,1));
             v.add(contenedorTop);
@@ -355,7 +369,9 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Crear AFN básico");                   // colocamos titulo a la ventana
             
-            contenedorVentana.removeAll();
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
             contenedorTop.add(jLabel10);
             contenedorTop.add(jTextField10);
@@ -369,6 +385,9 @@ public class Interfaz extends javax.swing.JFrame {
             v.add(contenedorTop);
             v.add(contenedorMiddle);
             v.add(contenedorBottom);
+            
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -377,8 +396,11 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Operación cerradura +");
             
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
-            contenedorTop.add(jLabel13);
+            contenedorTop.add(jLabel13, BorderLayout.WEST);
             contenedorTop.add(select1);
             
             v.setLayout(new GridLayout(2,1));
@@ -392,8 +414,11 @@ public class Interfaz extends javax.swing.JFrame {
             v.setVisible(true);
             v.setTitle("Operación cerradura *");
             
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
             contenedorTop.setLayout(new GridLayout(1,2));
-            contenedorTop.add(jLabel13);
+            contenedorTop.add(jLabel13, BorderLayout.WEST);
             contenedorTop.add(select1);
             
             v.setLayout(new GridLayout(2,1));
