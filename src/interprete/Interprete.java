@@ -5,21 +5,28 @@
  */
 package interprete;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alejandro
  */
 public class Interprete {
 
+    public Afn afn;
+    public ArrayList<Afn> afns;
   /**
    * @param args the command line arguments
    */
-  public static void main(String[] args) {
+  /*public static void main(String[] args) {
       System.out.println("Hola mundo");
+  }*/  
+    
+  public Interprete() {
+        afns = new ArrayList();
   }
-  
-  public Afn crearBasico(char c) {
-      Afn afn = new Afn(c);
-      return afn;
-  }
+
+    public void crearBasico(char c) {
+        afns.add(new Afn(c));
+    }
 }

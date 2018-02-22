@@ -45,8 +45,10 @@ public class Interfaz extends javax.swing.JFrame {
     private JComboBox select2;
     private JComboBox select3;
     private Ventana v;
+    public Interprete inter;
     
     public Interfaz() {
+        inter = new Interprete();
         initComponents();
         inicializar();
     }
@@ -439,7 +441,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (evt.getSource() == jButton7){
             String text = jTextField1.getText();
-            boolean isOK = true;
+            boolean isOK = inter.afns.get(0).AnalizarCadena(text);
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
@@ -491,6 +493,10 @@ public class Interfaz extends javax.swing.JFrame {
                     s1 = select1.getSelectedIndex();
                     System.out.println("text: " + text);
                     System.out.println("s1: " + s1);
+                    
+                    if(inter.afns.size()<=3){
+                        inter.crearBasico(text.toCharArray()[0]);
+                    }
                     break;
                 case "Unir AFN's":
                     //0: A1; 1: A2; 2:A3 
