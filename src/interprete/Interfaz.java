@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -436,20 +437,98 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        if (evt.getSource() == jButton7){
+            String text = jTextField1.getText();
+            boolean isOK = true;
+            System.out.println("text: " + text);
+            System.out.println("isOK: " + isOK);
+            if(isOK){
+                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+            }else{
+                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+            }
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        if (evt.getSource() == jButton8){
+            String text = jTextField2.getText();
+            boolean isOK = true;
+            System.out.println("text: " + text);
+            System.out.println("isOK: " + isOK);
+            if(isOK){
+                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+            }else{
+                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+            }
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        if (evt.getSource() == jButton9){
+            String text = jTextField3.getText();
+            boolean isOK = true;
+            System.out.println("text: " + text);
+            System.out.println("isOK: " + isOK);
+            if(isOK){
+                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+            }else{
+                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+            }
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
         if (evt.getSource() == jButton10){
             System.out.println("rer");
+            String title = v.getTitle();
+            String text;
+            int s1, s2, s3;
+            switch(title){
+                case "Crear AFN básico":
+                    text = jTextField10.getText();
+                    //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    System.out.println("text: " + text);
+                    System.out.println("s1: " + s1);
+                    break;
+                case "Unir AFN's":
+                    //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    s2 = select2.getSelectedIndex();
+                    s3 = select3.getSelectedIndex();
+                    System.out.println("s1: " + s1);
+                    System.out.println("s2: " + s2);
+                    System.out.println("s3: " + s3);
+                    break;
+                case "Concatenar AFN's":
+                     //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    s2 = select2.getSelectedIndex();
+                    s3 = select3.getSelectedIndex();
+                    System.out.println("s1: " + s1);
+                    System.out.println("s2: " + s2);
+                    System.out.println("s3: " + s3);
+                    break;
+                case "Operación cerradura +":
+                     //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    System.out.println("s1: " + s1);
+                    break;
+                case "Operación cerradura *":
+                     //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    System.out.println("s1: " + s1);
+                    break;
+                case "Operación ?":
+                     //0: A1; 1: A2; 2:A3 
+                    s1 = select1.getSelectedIndex();
+                    System.out.println("s1: " + s1);
+                    break;
+                default: 
+                    System.out.println("Error");
+                    break;
+            }
             v.dispose();
         }
     }
