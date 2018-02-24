@@ -233,4 +233,71 @@ public class Afn {
         
         return this;
     }
+    
+    public Afn cerrMas() {
+        Estado edoIni = new Estado();
+        Estado edoFin = new Estado();
+        
+        edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+        
+        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+            this.estadosAceptacion.iterator().next().EdoAcept = false;
+        }
+        
+        edoFin.setEstadoTrue();
+        this.estadosAceptacion.clear();
+        this.estadosAceptacion.add(edoFin);
+        this.estadoInicial = edoIni;
+        this.estados.add(edoIni);
+        this.estados.add(edoFin);
+        
+        return this;
+    }
+    
+    public Afn cerrEstrella() {
+        Estado edoIni = new Estado();
+        Estado edoFin = new Estado();
+        
+        edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+        edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+        
+        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+            this.estadosAceptacion.iterator().next().EdoAcept = false;
+        }
+        
+        edoFin.setEstadoTrue();
+        this.estadosAceptacion.clear();
+        this.estadosAceptacion.add(edoFin);
+        this.estadoInicial = edoIni;
+        this.estados.add(edoIni);
+        this.estados.add(edoFin);
+        
+        return this;
+    }
+    
+    public Afn ConcatenarAfn(Afn f2) {
+       for(int i = 0; i != this.estadosAceptacion.size(); i++)  {
+           for(int j = 0; j != this.estadoInicial.Transiciones.size(); j++) {
+               this.estadosAceptacion.iterator().next().setTransicion(this.estadoInicial.Transiciones.iterator().next().minSimb, this.estadoInicial.Transiciones.iterator().next().maxSimb, this.estadoInicial.Transiciones.iterator().next().getEstado());
+           }
+       }
+       
+       f2.estados.remove(f2.estadoInicial);
+       
+       for(int k = 0; k != this.estadosAceptacion.size(); k++) {
+           this.estadosAceptacion.iterator().next().EdoAcept = false;
+       }
+       this.estadosAceptacion.clear();
+       
+       this.estadosAceptacion.addAll(f2.estadosAceptacion);
+       this.alfabeto.addAll(f2.alfabeto);
+       this.estados.addAll(f2.estados);
+       f2 = null;
+       
+       return this;
+    }
 }
