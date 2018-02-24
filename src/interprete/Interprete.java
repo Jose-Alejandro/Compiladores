@@ -27,6 +27,8 @@ public class Interprete {
   }
 
     public void crearBasico(char c) {
-        afns.add(new Afn(c));
+        Afn a = new Afn();
+        a = a.AfnBasico(c);
+        afns.add(a);
     }
 }

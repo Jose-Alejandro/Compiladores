@@ -11,21 +11,28 @@ import java.util.Stack;
  */
 public class Afn {
     
+    HashSet<Estado> estados;
     HashSet<Estado> estadosAceptacion;
     Estado estadoInicial;
     ArrayList<String> alfabeto ;
     
+    public Afn() {
+        this.alfabeto = new ArrayList();
+        this.estados = new HashSet();
+        this.estadosAceptacion = new HashSet();
+        this.estadoInicial = new Estado();
+    }
+    
     public Afn(char c) {
+        estados = new HashSet();
         estadosAceptacion = new HashSet();
         alfabeto = new ArrayList();
         alfabeto.add("" + c);
-        estadoInicial = new Estado();
-        estadosAceptacion.add(new Estado());
-        estadosAceptacion.iterator().next().setEstadoTrue();
+        this.setEstadoAceptacion();
     }
     
     public HashSet<Estado> cerraduraEpsilon(Estado e) {
-        HashSet<Estado> estados = new HashSet();
+        HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones;
         Stack<Estado> pila = new Stack();
         Estado estado;
@@ -33,18 +40,19 @@ public class Afn {
         pila.push(e);
         while(!pila.empty()){
             estado = pila.pop();
-            if(!estados.contains(estado)) {
-                estados.add(estado);
+            if(!estados1.contains(estado)) {
+                estados1.add(estado);
             }
             transiciones = estado.getTransiciones();
             //ciclo para verificar si existen transiciones epsilon en el estado
             for(int i = 0; i < transiciones.size(); i++) {
-                if(transiciones.iterator().next().getMaxSimb() == '\00') {
+                System.out.println("Estado" + transiciones.iterator().next().getEstado());
+                if(transiciones.iterator().next().getMaxSimb() == '|') {
                    pila.push(transiciones.iterator().next().getEstado());
                 }
             }
         }
-        return estados;
+        return estados1;
     }
     
     public HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
@@ -76,21 +84,28 @@ public class Afn {
     }
     
     public boolean AnalizarCadena(String s) {
-        HashSet<Estado> estados, conjunto;
+        HashSet<Estado> estados1, conjunto;
         int longitud;
-        estados = cerraduraEpsilon(this.estadoInicial);
+        estados1 = cerraduraEpsilon(this.estadoInicial);
+        System.out.println("Estado Inicial: ");
+        this.estadoInicial.imprimirEstado();
         longitud = s.length();
+        //System.out.println("Longitud: " + longitud);
         for(int i = 0; i < longitud; i++) {
-            conjunto = irA(estados, s.charAt(i));
+            System.out.println("Símbolo a analizar: " + s.charAt(i));
+            conjunto = irA(estados1, s.charAt(i));
             if(conjunto.isEmpty()) {
+                System.out.println("Analizar 1");
                 return false;
             }
         }
         for(int j = 0; j < estadosAceptacion.size(); j++) {
-            if(estados.contains(estadosAceptacion.iterator().next())) {
+            if(estados1.contains(estadosAceptacion.iterator().next())) {
+                System.out.println("Analizar 2");
                 return true;
             }
         }
+        System.out.println("Analizar 3");
         return false;
     }
     
@@ -100,5 +115,45 @@ public class Afn {
     
     public HashSet<Estado> getEstadosAceptacion() { //Retorna el conjunto de estados de aceptación del afn
         return this.estadosAceptacion;
+    }
+    
+    public void setEstadoAceptacion(Estado e) {
+        this.estadosAceptacion.add(e);
+    }
+    
+    public void setEstadoAceptacion() {
+        Estado eAcept = new Estado();
+        this.estadosAceptacion.add(eAcept);
+    }
+    
+    public Afn AfnBasico(char s) {
+        Estado edoFin;
+        //this.estadoInicial = new Estado();
+        edoFin = new Estado();
+        edoFin.setEstadoTrue();
+        this.estadoInicial.setTransicion(s, edoFin);
+        //this.alfabeto = new ArrayList();
+        this.alfabeto.add("" + s);
+        this.estados.add(this.estadoInicial);
+        this.estados.add(edoFin);
+        this.estadosAceptacion.add(edoFin);
+        
+        return this;
+    }
+    
+    public Afn AfnBasico(char s, char s2) {
+        Estado edoFin;
+        this.estadoInicial = new Estado();
+        edoFin = new Estado();
+        edoFin.setEstadoTrue();
+        this.estadoInicial.setTransicion(s, s2, edoFin);
+        for(int i = s; i != s2; i++) {
+            this.alfabeto.add("" + i);
+        }
+        this.estados.add(this.estadoInicial);
+        this.estados.add(edoFin);
+        this.estadosAceptacion.add(edoFin);
+        
+        return this;
     }
 }

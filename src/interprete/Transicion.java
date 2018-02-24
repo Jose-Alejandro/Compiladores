@@ -51,4 +51,9 @@ public class Transicion {
         this.estado = estado;
     }
     
+    public void imprimirTransicion() {
+        System.out.println("Simbolo mínimo: " + this.minSimb);
+        System.out.println("Simbolo máximo: " + this.maxSimb);
+        System.out.println("Estado de Transición: " + this.estado.getIdEdo());
+    }
 }

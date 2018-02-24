@@ -18,12 +18,21 @@ public class Estado
     boolean EdoAcept;
     public HashSet<Transicion> Transiciones;
     
-    public Estado()
+    public Estado(char c, Estado e)
     {
         IdEdo=IdEdoAct+1;
         EdoAcept=false;
-        Transiciones = new HashSet<Transicion>();
+        Transiciones = new HashSet();
         Transiciones.clear();
+        this.setTransicion(c, e);
+    }
+    
+    public Estado()
+    {
+        IdEdo = IdEdoAct + 1;
+        EdoAcept = false;
+        Transiciones = new HashSet();
+        IdEdoAct++;
     }
     
     public int getIdEdo() //Regresa el Id del Estado en el que nos encontramos.
@@ -41,15 +50,40 @@ public class Estado
         return this.Transiciones;
     }
     
+    //Agrega la transición enviada al estado
     public void setTransicion(Transicion transicion)
     {
         Transiciones.add(transicion);
     }
     
+    //Agrega una transición al Estado creándola primero
+    public void setTransicion(char c, Estado e)
+    {
+        Transicion transicion = new Transicion(c, e);
+        Transiciones.add(transicion);
+    }
+    
+    //Agrega una transición al Estado creándola primero con un rango de carac
+    public void setTransicion(char c, char c2, Estado e)
+    {
+        Transicion transicion = new Transicion(c, c2, e);
+        Transiciones.add(transicion);
+    }
+    
+    //Cambia el estado de aceptación a true
     public void setEstadoTrue()
     {
         this.EdoAcept=true;
     }
     
+    //Imprime en consola el estado
+    public void imprimirEstado() {
+        System.out.println("ID: " + this.IdEdo);
+        System.out.println("Estado Aceptación: " + this.EdoAcept);
+        System.out.println("Número de Transiciones: " + this.Transiciones.size());
+        for(int i = 0; i < this.Transiciones.size(); i++) {
+            Transiciones.iterator().next().imprimirTransicion();
+        }
+    }
     
 }
