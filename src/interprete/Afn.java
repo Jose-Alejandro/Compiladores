@@ -23,15 +23,16 @@ public class Afn {
         this.estadoInicial = new Estado();
     }
     
-    public Afn(char c) {
+    /*public Afn(char c) {
         estados = new HashSet();
         estadosAceptacion = new HashSet();
         alfabeto = new ArrayList();
         alfabeto.add("" + c);
         this.setEstadoAceptacion();
-    }
+    }*/
     
     public HashSet<Estado> cerraduraEpsilon(Estado e) {
+        System.out.println("\n=== Método cerraduraEpsilon ===");
         HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones;
         Stack<Estado> pila = new Stack();
@@ -40,66 +41,94 @@ public class Afn {
         pila.push(e);
         while(!pila.empty()){
             estado = pila.pop();
+            System.out.println("\nEstado en la pila: ");
+            estado.imprimirEstado();
             if(!estados1.contains(estado)) {
+                System.out.println("\nAgrega estado");
                 estados1.add(estado);
             }
             transiciones = estado.getTransiciones();
+            System.out.println("Transiciones: " + transiciones.size());
             //ciclo para verificar si existen transiciones epsilon en el estado
             for(int i = 0; i < transiciones.size(); i++) {
-                System.out.println("Estado" + transiciones.iterator().next().getEstado());
+//                System.out.println("\nEstado verif epsilon: ");
+//                transiciones.iterator().next().getEstado().imprimirEstado();
                 if(transiciones.iterator().next().getMaxSimb() == '|') {
-                   pila.push(transiciones.iterator().next().getEstado());
+                    System.out.println("\nAgrega por Epsilon");
+                    pila.push(transiciones.iterator().next().getEstado());
                 }
             }
+        }
+        for(int j = 0; j != estados1.size(); j++) {
+            System.out.println("\nEstadoCeEp " + j);
+            estados1.iterator().next().imprimirEstado();
         }
         return estados1;
     }
     
     public HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
-        HashSet<Estado> estados = new HashSet();
-        for(int i = 0; i < conjunto.size(); i++) {
-            estados.addAll(cerraduraEpsilon(conjunto.iterator().next()));
+        System.out.println("\n=== Método cerradura Epsilon Conjunto ===");
+        HashSet<Estado> estados1 = new HashSet();
+        for(int i = 0; i != conjunto.size(); i++) {
+            estados1.addAll(cerraduraEpsilon(conjunto.iterator().next()));
         }
-        return estados;
+        for(int j = 0; j != estados1.size(); j++) {
+            System.out.println("\nEstadoCeEpConj " + j);
+            estados1.iterator().next().imprimirEstado();
+        }
+        return estados1;
     }
     
     public HashSet<Estado> mover(Estado e, char c) {
-        HashSet<Estado> estados = new HashSet();
+        System.out.println("\n=== Método mover ===");
+        e.imprimirEstado();
+        HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones = e.getTransiciones();
         //Ciclo para obtener transisiones epsilon de los estados
-        for(int  i = 0; i < transiciones.size(); i++) {
+        for(int  i = 0; i != transiciones.size(); i++) {
             if(transiciones.iterator().next().getMinSimb() >= c && transiciones.iterator().next().getMaxSimb() <= c) {
-                estados.add(transiciones.iterator().next().getEstado());
+                estados1.add(transiciones.iterator().next().getEstado());
             }
         }
-        return estados;
+        for(int j = 0; j != estados1.size(); j++) {
+            System.out.println("\nEstadoMov " + j);
+            estados1.iterator().next().imprimirEstado();
+        }
+        return estados1;
     }
     
     public HashSet<Estado> irA(HashSet<Estado> conjunto, char c) {
-        HashSet<Estado> estados = new HashSet();
+        System.out.println("\n=== Método irA ===");
+        HashSet<Estado> estados1 = new HashSet();
+        System.out.println("\nEstados en conjunto: " + conjunto.size());
         for(int i = 0; i < conjunto.size(); i++) {
-            estados.addAll(mover(conjunto.iterator().next(), c));
+            estados1.addAll(mover(conjunto.iterator().next(), c));
         }
-        return cerraduraEpsilon(estados);
+        for(int j = 0; j != estados1.size(); j++) {
+            System.out.println("\nEstadoIrA " + j);
+            estados1.iterator().next().imprimirEstado();
+        }
+        return cerraduraEpsilon(estados1);
     }
     
     public boolean AnalizarCadena(String s) {
         HashSet<Estado> estados1, conjunto;
         int longitud;
-        estados1 = cerraduraEpsilon(this.estadoInicial);
-        System.out.println("Estado Inicial: ");
+        System.out.println("\nEstado Inicial: ");
         this.estadoInicial.imprimirEstado();
+        estados1 = cerraduraEpsilon(this.estadoInicial);
         longitud = s.length();
         //System.out.println("Longitud: " + longitud);
-        for(int i = 0; i < longitud; i++) {
-            System.out.println("Símbolo a analizar: " + s.charAt(i));
+        for(int i = 0; i != longitud; i++) {
+            System.out.println("\nSímbolo a analizar: " + s.charAt(i));
             conjunto = irA(estados1, s.charAt(i));
             if(conjunto.isEmpty()) {
                 System.out.println("Analizar 1");
                 return false;
             }
+            estados1.addAll(conjunto);
         }
-        for(int j = 0; j < estadosAceptacion.size(); j++) {
+        for(int j = 0; j != estadosAceptacion.size(); j++) {
             if(estados1.contains(estadosAceptacion.iterator().next())) {
                 System.out.println("Analizar 2");
                 return true;
@@ -153,6 +182,54 @@ public class Afn {
         this.estados.add(this.estadoInicial);
         this.estados.add(edoFin);
         this.estadosAceptacion.add(edoFin);
+        
+        return this;
+    }
+    
+    public Afn Opcional() {
+        Estado edoIni = new Estado();
+        Estado edoFin = new Estado();
+        
+        edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+        edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+        
+        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            this.estadosAceptacion.iterator().next().EdoAcept = false;    
+        }
+        
+        edoFin.setEstadoTrue();
+        this.estadoInicial = edoIni;
+        this.estadosAceptacion.clear();
+        this.estadosAceptacion.add(edoFin);
+        this.estados.add(edoIni);
+        this.estados.add(edoFin);
+        
+        return this;
+    }
+    
+    public Afn unirAfn(Afn f2) {
+        Estado nuevoIni = new Estado();
+        Estado nuevoFin = new Estado();
+        
+        nuevoIni.setTransicion(Epsilon.epsilon, this.estadoInicial);
+        nuevoIni.setTransicion(Epsilon.epsilon, f2.estadoInicial);
+        
+        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+            this.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
+            this.estadosAceptacion.iterator().next().EdoAcept = false;
+        }
+        for(int i = 0; i != f2.estadosAceptacion.size(); i++) {
+            f2.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
+            f2.estadosAceptacion.iterator().next().EdoAcept = false;
+        }
+        
+        nuevoFin.setEstadoTrue();
+        this.estados.add(nuevoIni);
+        this.estados.add(nuevoFin);
+        this.estadoInicial = nuevoIni;
+        this.estadosAceptacion.clear();
+        this.estadosAceptacion.add(nuevoFin);
         
         return this;
     }
