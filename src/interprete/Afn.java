@@ -3,6 +3,7 @@ package interprete;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Stack;
 
 /**
@@ -128,8 +129,14 @@ public class Afn {
             }
             estados1.addAll(conjunto);
         }
-        for(int j = 0; j != estadosAceptacion.size(); j++) {
+        /*for(int j = 0; j != estadosAceptacion.size(); j++) {
             if(estados1.contains(estadosAceptacion.iterator().next())) {
+                System.out.println("Analizar 2");
+                return true;
+            }
+        }*/
+        for(Estado e : estadosAceptacion){
+            if(estados1.contains(e)){
                 System.out.println("Analizar 2");
                 return true;
             }

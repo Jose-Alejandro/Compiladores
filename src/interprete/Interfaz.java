@@ -61,7 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         v.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
         v.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
         this.setLocationRelativeTo(null);
-        jLabel10 = new JLabel("Insertar caracteres: ");
+        jLabel10 = new JLabel("Insertar caracter: ");
         jLabel11 = new JLabel("Guardar en: ");
         jLabel12 = new JLabel(" con ");
         jLabel13 = new JLabel("Aplicar a: ");
@@ -455,7 +455,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (evt.getSource() == jButton8){
             String text = jTextField2.getText();
-            boolean isOK = true;
+            boolean isOK = inter.afns.get(1).AnalizarCadena(text);
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
@@ -469,7 +469,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         if (evt.getSource() == jButton9){
             String text = jTextField3.getText();
-            boolean isOK = true;
+            boolean isOK = inter.afns.get(2).AnalizarCadena(text);
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
@@ -489,13 +489,15 @@ public class Interfaz extends javax.swing.JFrame {
             switch(title){
                 case "Crear AFN básico":
                     text = jTextField10.getText();
+                    jTextField10.setText("");
                     //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("text: " + text);
                     System.out.println("s1: " + s1);
                     
                     if(inter.afns.size()<=3){
-                        inter.crearBasico(text.toCharArray()[0]);
+                        //inter.crearBasico(text.toCharArray()[0]);
+                        inter.afns.add((int) s1, new Afn().AfnBasico(text.toCharArray()[0]));
                     }
                     break;
                 case "Unir AFN's":
@@ -506,6 +508,12 @@ public class Interfaz extends javax.swing.JFrame {
                     System.out.println("s1: " + s1);
                     System.out.println("s2: " + s2);
                     System.out.println("s3: " + s3);
+                    if(inter.afns.size() >= 2){
+                        Afn afn1 = inter.afns.get((int)s1);
+                        Afn afn2 = inter.afns.get((int)s2);
+                        afn1 = afn1.unirAfn(afn2);
+                        inter.afns.set((int) s3, afn1);
+                    }
                     break;
                 case "Concatenar AFN's":
                      //0: A1; 1: A2; 2:A3 
