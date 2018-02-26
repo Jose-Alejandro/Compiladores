@@ -512,7 +512,7 @@ public class Interfaz extends javax.swing.JFrame {
                         Afn afn1 = inter.afns.get((int)s1);
                         Afn afn2 = inter.afns.get((int)s2);
                         afn1 = afn1.unirAfn(afn2);
-                        inter.afns.set((int) s3, afn1);
+                        inter.afns.add((int) s3, afn1);
                     }
                     break;
                 case "Concatenar AFN's":
@@ -523,21 +523,42 @@ public class Interfaz extends javax.swing.JFrame {
                     System.out.println("s1: " + s1);
                     System.out.println("s2: " + s2);
                     System.out.println("s3: " + s3);
+                    if(inter.afns.size() >= 2){
+                        Afn afn1 = inter.afns.get((int)s1);
+                        Afn afn2 = inter.afns.get((int)s2);
+                        afn1 = afn1.ConcatenarAfn(afn2);
+                        inter.afns.add((int) s3, afn1);
+                    }
                     break;
                 case "Operación cerradura +":
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
+                    if(inter.afns.size() >= 2){
+                        Afn afn1 = inter.afns.get((int)s1);
+                        afn1 = afn1.cerrMas();
+                        inter.afns.add((int) s1, afn1);
+                    }
                     break;
                 case "Operación cerradura *":
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
+                    if(inter.afns.size() >= 2){
+                        Afn afn1 = inter.afns.get((int)s1);
+                        afn1 = afn1.cerrEstrella();
+                        inter.afns.add((int) s1, afn1);
+                    }
                     break;
                 case "Operación ?":
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
+                    if(inter.afns.size() >= 2){
+                        Afn afn1 = inter.afns.get((int)s1);
+                        afn1 = afn1.Opcional();
+                        inter.afns.add((int) s1, afn1);
+                    }
                     break;
                 default: 
                     System.out.println("Error");
