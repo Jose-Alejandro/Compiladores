@@ -61,7 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         v.setResizable(false);                               // hacemos que la ventana no sea redimiensionable
         v.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);    // hacemos que cuando se cierre la ventana termina todo proceso
         this.setLocationRelativeTo(null);
-        jLabel10 = new JLabel("Insertar caracter: ");
+        jLabel10 = new JLabel("Insertar caracteres: ");
         jLabel11 = new JLabel("Guardar en: ");
         jLabel12 = new JLabel(" con ");
         jLabel13 = new JLabel("Aplicar a: ");
