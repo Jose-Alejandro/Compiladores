@@ -164,7 +164,7 @@ public class Afn {
                 System.out.println("Analizar 1");
                 return false;
             }
-            estados1.addAll(conjunto);
+            estados1 = conjunto;
         }
         /*for(int j = 0; j != estadosAceptacion.size(); j++) {
             if(estados1.contains(estadosAceptacion.iterator().next())) {
