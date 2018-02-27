@@ -534,7 +534,7 @@ public class Interfaz extends javax.swing.JFrame {
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
-                    if(inter.afns.size() >= 2){
+                    if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.cerrMas();
                         inter.afns.add((int) s1, afn1);
@@ -544,7 +544,7 @@ public class Interfaz extends javax.swing.JFrame {
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
-                    if(inter.afns.size() >= 2){
+                    if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.cerrEstrella();
                         inter.afns.add((int) s1, afn1);
@@ -554,7 +554,7 @@ public class Interfaz extends javax.swing.JFrame {
                      //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("s1: " + s1);
-                    if(inter.afns.size() >= 2){
+                    if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.Opcional();
                         inter.afns.add((int) s1, afn1);

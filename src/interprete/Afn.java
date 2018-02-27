@@ -236,7 +236,8 @@ public class Afn {
         
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
-        
+        edoIni.imprimirEstado();
+        edoFin.imprimirEstado();
 //        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
 //            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
 //            this.estadosAceptacion.iterator().next().EdoAcept = false;    
