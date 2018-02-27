@@ -352,7 +352,7 @@ public class Afn {
 //           }
 //       }
        for(Estado e : this.estadosAceptacion) {
-           for(Transicion t : this.estadoInicial.Transiciones) {
+           for(Transicion t : f2.estadoInicial.Transiciones) {
                e.setTransicion(t.minSimb, t.maxSimb, t.getEstado());
            }
        }       
