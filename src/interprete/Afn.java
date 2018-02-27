@@ -3,7 +3,6 @@ package interprete;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Stack;
 
 /**
@@ -50,19 +49,32 @@ public class Afn {
             }
             transiciones = estado.getTransiciones();
             System.out.println("Transiciones: " + transiciones.size());
+            
             //ciclo para verificar si existen transiciones epsilon en el estado
-            for(int i = 0; i < transiciones.size(); i++) {
+
+//            for(int i = 0; i < transiciones.size(); i++) {
 //                System.out.println("\nEstado verif epsilon: ");
 //                transiciones.iterator().next().getEstado().imprimirEstado();
-                if(transiciones.iterator().next().getMaxSimb() == '|') {
+//                if(transiciones.iterator().next().getMaxSimb() == '|') {
+//                    System.out.println("\nAgrega por Epsilon");
+//                    pila.push(transiciones.iterator().next().getEstado());
+//                }
+//            }
+            
+            for(Transicion t : transiciones) {
+                if(t.getMaxSimb() == '|') {
                     System.out.println("\nAgrega por Epsilon");
-                    pila.push(transiciones.iterator().next().getEstado());
+                    pila.push(t.getEstado());
                 }
             }
         }
-        for(int j = 0; j != estados1.size(); j++) {
-            System.out.println("\nEstadoCeEp " + j);
-            estados1.iterator().next().imprimirEstado();
+//        for(int j = 0; j != estados1.size(); j++) {
+//            System.out.println("\nEstadoCeEp " + j);
+//            estados1.iterator().next().imprimirEstado();
+//        }
+        for(Estado es : estados1) {
+            System.out.println("\nEstadoCeEp ");
+            es.imprimirEstado();
         }
         return estados1;
     }
@@ -70,12 +82,19 @@ public class Afn {
     public HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
         System.out.println("\n=== Método cerradura Epsilon Conjunto ===");
         HashSet<Estado> estados1 = new HashSet();
-        for(int i = 0; i != conjunto.size(); i++) {
-            estados1.addAll(cerraduraEpsilon(conjunto.iterator().next()));
+//        for(int i = 0; i != conjunto.size(); i++) {
+//            estados1.addAll(cerraduraEpsilon(conjunto.iterator().next()));
+//        }
+        for(Estado e : conjunto) {
+            estados1.addAll(cerraduraEpsilon(e));
         }
-        for(int j = 0; j != estados1.size(); j++) {
-            System.out.println("\nEstadoCeEpConj " + j);
-            estados1.iterator().next().imprimirEstado();
+//        for(int j = 0; j != estados1.size(); j++) {
+//            System.out.println("\nEstadoCeEpConj " + j);
+//            estados1.iterator().next().imprimirEstado();
+//        }
+        for(Estado es : estados1) {
+            System.out.println("\nEstadoCeEpConj ");
+            es.imprimirEstado();
         }
         return estados1;
     }
@@ -85,15 +104,26 @@ public class Afn {
         e.imprimirEstado();
         HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones = e.getTransiciones();
+        
         //Ciclo para obtener transisiones epsilon de los estados
-        for(int  i = 0; i != transiciones.size(); i++) {
-            if(transiciones.iterator().next().getMinSimb() >= c && transiciones.iterator().next().getMaxSimb() <= c) {
-                estados1.add(transiciones.iterator().next().getEstado());
+        
+//        for(int  i = 0; i != transiciones.size(); i++) {
+//            if(transiciones.iterator().next().getMinSimb() >= c && transiciones.iterator().next().getMaxSimb() <= c) {
+//                estados1.add(transiciones.iterator().next().getEstado());
+//            }
+//        }
+        for(Transicion t : transiciones) {
+            if(t.getMinSimb() >= c && t.getMaxSimb() <= c) {
+                estados1.add(t.getEstado());
             }
         }
-        for(int j = 0; j != estados1.size(); j++) {
-            System.out.println("\nEstadoMov " + j);
-            estados1.iterator().next().imprimirEstado();
+//        for(int j = 0; j != estados1.size(); j++) {
+//            System.out.println("\nEstadoMov " + j);
+//            estados1.iterator().next().imprimirEstado();
+//        }
+        for(Estado es : estados1) {
+            System.out.println("\nEstadoMov ");
+            es.imprimirEstado();
         }
         return estados1;
     }
@@ -102,12 +132,19 @@ public class Afn {
         System.out.println("\n=== Método irA ===");
         HashSet<Estado> estados1 = new HashSet();
         System.out.println("\nEstados en conjunto: " + conjunto.size());
-        for(int i = 0; i < conjunto.size(); i++) {
-            estados1.addAll(mover(conjunto.iterator().next(), c));
+//        for(int i = 0; i < conjunto.size(); i++) {
+//            estados1.addAll(mover(conjunto.iterator().next(), c));
+//        }
+        for(Estado e : conjunto) {
+            estados1.addAll(mover(e, c));
         }
-        for(int j = 0; j != estados1.size(); j++) {
-            System.out.println("\nEstadoIrA " + j);
-            estados1.iterator().next().imprimirEstado();
+//        for(int j = 0; j != estados1.size(); j++) {
+//            System.out.println("\nEstadoIrA " + j);
+//            estados1.iterator().next().imprimirEstado();
+//        }
+        for(Estado e : estados1) {
+            System.out.println("\nEstadoIrA ");
+            e.imprimirEstado();
         }
         return cerraduraEpsilon(estados1);
     }
@@ -200,9 +237,13 @@ public class Afn {
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
         
-        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
-            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
-            this.estadosAceptacion.iterator().next().EdoAcept = false;    
+//        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+//            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+//            this.estadosAceptacion.iterator().next().EdoAcept = false;    
+//        }
+        for(Estado e : this.estadosAceptacion) {
+            e.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            e.EdoAcept = false;
         }
         
         edoFin.setEstadoTrue();
@@ -222,13 +263,21 @@ public class Afn {
         nuevoIni.setTransicion(Epsilon.epsilon, this.estadoInicial);
         nuevoIni.setTransicion(Epsilon.epsilon, f2.estadoInicial);
         
-        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
-            this.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
-            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+//            this.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
+//            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        }
+        for(Estado e : this.estadosAceptacion) {
+            e.setTransicion(Epsilon.epsilon, nuevoFin);
+            e.EdoAcept = false;
         }
-        for(int i = 0; i != f2.estadosAceptacion.size(); i++) {
-            f2.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
-            f2.estadosAceptacion.iterator().next().EdoAcept = false;
+//        for(int i = 0; i != f2.estadosAceptacion.size(); i++) {
+//            f2.estadosAceptacion.iterator().next().setTransicion(Epsilon.epsilon, nuevoFin);
+//            f2.estadosAceptacion.iterator().next().EdoAcept = false;
+//        }
+        for(Estado e : f2.estadosAceptacion) {
+            e.setTransicion(Epsilon.epsilon, nuevoFin);
+            e.EdoAcept = false;
         }
         
         nuevoFin.setEstadoTrue();
@@ -247,10 +296,15 @@ public class Afn {
         
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
         
-        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
-            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
-            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
-            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+//            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+//            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+//            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        }
+        for(Estado e : this.estadosAceptacion) {
+            e.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            e.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+            e.EdoAcept = false;
         }
         
         edoFin.setEstadoTrue();
@@ -270,10 +324,15 @@ public class Afn {
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
         edoIni.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
         
-        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
-            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
-            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
-            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        for(int i = 0; i != this.estadosAceptacion.size(); i++) {
+//            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+//            this.estadosAceptacion.iterator().next().Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+//            this.estadosAceptacion.iterator().next().EdoAcept = false;
+//        }
+        for(Estado e : this.estadosAceptacion) {
+            e.Transiciones.add(new Transicion(Epsilon.epsilon, edoFin));
+            e.Transiciones.add(new Transicion(Epsilon.epsilon, this.estadoInicial));
+            e.EdoAcept = false;
         }
         
         edoFin.setEstadoTrue();
@@ -287,16 +346,23 @@ public class Afn {
     }
     
     public Afn ConcatenarAfn(Afn f2) {
-       for(int i = 0; i != this.estadosAceptacion.size(); i++)  {
-           for(int j = 0; j != this.estadoInicial.Transiciones.size(); j++) {
-               this.estadosAceptacion.iterator().next().setTransicion(this.estadoInicial.Transiciones.iterator().next().minSimb, this.estadoInicial.Transiciones.iterator().next().maxSimb, this.estadoInicial.Transiciones.iterator().next().getEstado());
+//       for(int i = 0; i != this.estadosAceptacion.size(); i++)  {
+//           for(int j = 0; j != this.estadoInicial.Transiciones.size(); j++) {
+//               this.estadosAceptacion.iterator().next().setTransicion(this.estadoInicial.Transiciones.iterator().next().minSimb, this.estadoInicial.Transiciones.iterator().next().maxSimb, this.estadoInicial.Transiciones.iterator().next().getEstado());
+//           }
+//       }
+       for(Estado e : this.estadosAceptacion) {
+           for(Transicion t : this.estadoInicial.Transiciones) {
+               e.setTransicion(t.minSimb, t.maxSimb, t.getEstado());
            }
-       }
-       
+       }       
        f2.estados.remove(f2.estadoInicial);
        
-       for(int k = 0; k != this.estadosAceptacion.size(); k++) {
-           this.estadosAceptacion.iterator().next().EdoAcept = false;
+//       for(int k = 0; k != this.estadosAceptacion.size(); k++) {
+//           this.estadosAceptacion.iterator().next().EdoAcept = false;
+//       }
+       for(Estado e : this.estadosAceptacion) {
+           e.EdoAcept = false;
        }
        this.estadosAceptacion.clear();
        
