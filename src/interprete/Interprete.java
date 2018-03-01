@@ -24,6 +24,9 @@ public class Interprete {
     
   public Interprete() {
         afns = new ArrayList();
+        for (int i = 0; i != 3; i++) {
+          afns.add(null);
+      }
   }
 
     public void crearBasico(char c) {

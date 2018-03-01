@@ -497,7 +497,7 @@ public class Interfaz extends javax.swing.JFrame {
                     
                     if(inter.afns.size()<=3){
                         //inter.crearBasico(text.toCharArray()[0]);
-                        inter.afns.add((int) s1, new Afn().AfnBasico(text.toCharArray()[0]));
+                        inter.afns.set((int) s1, new Afn().AfnBasico(text.toCharArray()[0]));
                     }
                     break;
                 case "Unir AFN's":
@@ -512,7 +512,7 @@ public class Interfaz extends javax.swing.JFrame {
                         Afn afn1 = inter.afns.get((int)s1);
                         Afn afn2 = inter.afns.get((int)s2);
                         afn1 = afn1.unirAfn(afn2);
-                        inter.afns.add((int) s3, afn1);
+                        inter.afns.set((int) s3, afn1);
                     }
                     break;
                 case "Concatenar AFN's":
@@ -527,7 +527,7 @@ public class Interfaz extends javax.swing.JFrame {
                         Afn afn1 = inter.afns.get((int)s1);
                         Afn afn2 = inter.afns.get((int)s2);
                         afn1 = afn1.ConcatenarAfn(afn2);
-                        inter.afns.add((int) s3, afn1);
+                        inter.afns.set((int) s3, afn1);
                     }
                     break;
                 case "Operación cerradura +":
@@ -537,7 +537,7 @@ public class Interfaz extends javax.swing.JFrame {
                     if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.cerrMas();
-                        inter.afns.add((int) s1, afn1);
+                        inter.afns.set((int) s1, afn1);
                     }
                     break;
                 case "Operación cerradura *":
@@ -547,7 +547,7 @@ public class Interfaz extends javax.swing.JFrame {
                     if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.cerrEstrella();
-                        inter.afns.add((int) s1, afn1);
+                        inter.afns.set((int) s1, afn1);
                     }
                     break;
                 case "Operación ?":
@@ -557,7 +557,7 @@ public class Interfaz extends javax.swing.JFrame {
                     if(inter.afns.size() >= 1){
                         Afn afn1 = inter.afns.get((int)s1);
                         afn1 = afn1.Opcional();
-                        inter.afns.add((int) s1, afn1);
+                        inter.afns.set((int) s1, afn1);
                     }
                     break;
                 default: 
