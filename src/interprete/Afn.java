@@ -311,4 +311,17 @@ public class Afn {
        
        return this;
     }
+    
+    public Afn unionEspecial(Afn f2, Afn f3) {
+        Estado nuevoIni = new Estado();
+        
+        nuevoIni.setTransicion(Epsilon.epsilon, this.estadoInicial);
+        nuevoIni.setTransicion(Epsilon.epsilon, f2.estadoInicial);
+        nuevoIni.setTransicion(Epsilon.epsilon, f3.estadoInicial);
+        
+        this.estados.add(nuevoIni);
+        this.estadoInicial = nuevoIni;
+        
+        return this;
+    }
 }
