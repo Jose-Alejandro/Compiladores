@@ -89,7 +89,7 @@ public class Afn {
         
         //Ciclo para obtener transisiones epsilon de los estados
         for(Transicion t : transiciones) {
-            if(t.getMinSimb() >= c && t.getMaxSimb() <= c) {
+            if(t.getMinSimb() <= c && t.getMaxSimb() >= c) {
                 estados1.add(t.getEstado());
             }
         }
@@ -184,8 +184,9 @@ public class Afn {
         edoFin = new Estado();
         edoFin.setEstadoTrue();
         this.estadoInicial.setTransicion(s, s2, edoFin);
-        for(int i = s; i != s2; i++) {
-            this.alfabeto.add("" + i);
+        for(int i = s; i <= s2; i++) {
+            System.out.println(""+ ((char) i));
+            this.alfabeto.add("" + ((char) i));
         }
         this.estados.add(this.estadoInicial);
         this.estados.add(edoFin);

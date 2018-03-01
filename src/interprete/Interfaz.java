@@ -35,8 +35,11 @@ public class Interfaz extends javax.swing.JFrame {
     private JLabel jLabel11;
     private JLabel jLabel12;
     private JLabel jLabel13;
+    private JLabel jLabel14;
+    private JLabel jLabel15;
     private JButton jButton10;
     private JTextField jTextField10;
+    private JTextField jTextField11;
     private JPanel contenedorVentana;
     private JPanel contenedorTop;
     private JPanel contenedorMiddle;
@@ -65,6 +68,8 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel11 = new JLabel("Guardar en: ");
         jLabel12 = new JLabel(" con ");
         jLabel13 = new JLabel("Aplicar a: ");
+        jLabel14 = new JLabel("Min: ");
+        jLabel15 = new JLabel("Max: ");
         jButton10 = new JButton("OK");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,6 +77,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jTextField10 = new JTextField();
+        jTextField11 = new JTextField();
         contenedorVentana =  new JPanel();
         contenedorTop =  new JPanel();
         contenedorMiddle =  new JPanel();
@@ -378,9 +384,11 @@ public class Interfaz extends javax.swing.JFrame {
             contenedorTop.removeAll();
             contenedorMiddle.removeAll();
             contenedorBottom.removeAll();
-            contenedorTop.setLayout(new GridLayout(1,2));
-            contenedorTop.add(jLabel10);
+            contenedorTop.setLayout(new GridLayout(1,4));
+            contenedorTop.add(jLabel14);
             contenedorTop.add(jTextField10);
+            contenedorTop.add(jLabel15);
+            contenedorTop.add(jTextField11);
             contenedorMiddle.setLayout(new GridLayout(1,2));
             contenedorMiddle.add(jLabel11);
             contenedorMiddle.add(select1);
@@ -484,12 +492,14 @@ public class Interfaz extends javax.swing.JFrame {
         if (evt.getSource() == jButton10){
             System.out.println("rer");
             String title = v.getTitle();
-            String text;
+            String text, text2;
             int s1, s2, s3;
             switch(title){
                 case "Crear AFN básico":
                     text = jTextField10.getText();
                     jTextField10.setText("");
+                    text2 = jTextField11.getText();
+                    jTextField11.setText("");
                     //0: A1; 1: A2; 2:A3 
                     s1 = select1.getSelectedIndex();
                     System.out.println("text: " + text);
@@ -497,7 +507,12 @@ public class Interfaz extends javax.swing.JFrame {
                     
                     if(inter.afns.size()<=3){
                         //inter.crearBasico(text.toCharArray()[0]);
-                        inter.afns.set((int) s1, new Afn().AfnBasico(text.toCharArray()[0]));
+                        if(text.equals(text2)){
+                            inter.afns.set((int) s1, new Afn().AfnBasico(text.toCharArray()[0]));
+                        }else{
+                            inter.afns.set((int) s1, new Afn().AfnBasico(text.toCharArray()[0], text2.toCharArray()[0]));
+                        }
+                        
                     }
                     break;
                 case "Unir AFN's":
