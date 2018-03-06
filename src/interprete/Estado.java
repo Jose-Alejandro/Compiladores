@@ -16,6 +16,7 @@ public class Estado
     static int IdEdoAct=0;
     int IdEdo;
     boolean EdoAcept;
+    int token=-1;
     public HashSet<Transicion> Transiciones;
     
     public Estado(char c, Estado e)
@@ -74,6 +75,12 @@ public class Estado
     public void setEstadoTrue()
     {
         this.EdoAcept=true;
+        
+    }
+    public void setEstadoTrue(int token)
+    {
+        this.EdoAcept=true;
+        this.token=token;
     }
     
     //Imprime en consola el estado

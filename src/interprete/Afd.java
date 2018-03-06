@@ -31,4 +31,17 @@ public class Afd {
         
         return this;
     }
+
+//pasar un AFN al que se le ha aplicado la union especial
+     public Afd AfnToAfd(Afn a1) 
+     {
+        this.alfabeto.addAll(a1.alfabeto);
+        this.alfabeto.addAll(a2.alfabeto);
+        this.alfabeto.addAll(a3.alfabeto);
+        a1.unionEspecial(a2, a3);
+        //Variable para tabla e inicializarla con -1's
+        
+        
+        return this;
+    }
 }
