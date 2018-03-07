@@ -322,6 +322,9 @@ public class Afn {
         
         this.estados.add(nuevoIni);
         this.estadoInicial = nuevoIni;
+        //this.alfabeto.addAll(a1.alfabeto);
+        this.alfabeto.addAll(f2.alfabeto);
+        this.alfabeto.addAll(f3.alfabeto);
         
         return this;
     }
