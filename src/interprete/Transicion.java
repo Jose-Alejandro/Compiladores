@@ -10,18 +10,18 @@ package interprete;
  * @author Fernando
  */
 public class Transicion {
-    
+
     char minSimb;
     char maxSimb;
     Estado estado;
-    
-    public Transicion(char s, Estado estado){
+
+    public Transicion(char s, Estado estado) {
         minSimb = s;
         maxSimb = s;
         this.estado = estado;
     }
-    
-    public Transicion(char minSimb, char maxSimb, Estado estado){
+
+    public Transicion(char minSimb, char maxSimb, Estado estado) {
         this.minSimb = minSimb;
         this.maxSimb = maxSimb;
         this.estado = estado;
@@ -50,7 +50,7 @@ public class Transicion {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
+
     public void imprimirTransicion() {
         System.out.println("Simbolo mínimo: " + this.minSimb);
         System.out.println("Simbolo máximo: " + this.maxSimb);

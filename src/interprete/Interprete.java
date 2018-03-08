@@ -15,19 +15,20 @@ public class Interprete {
 
     public Afn afn;
     public ArrayList<Afn> afns;
-  /**
-   * @param args the command line arguments
-   */
-  /*public static void main(String[] args) {
+
+    /**
+     * @param args the command line arguments
+     */
+    /*public static void main(String[] args) {
       System.out.println("Hola mundo");
-  }*/  
-    
-  public Interprete() {
+  }*/
+
+    public Interprete() {
         afns = new ArrayList();
         for (int i = 0; i != 3; i++) {
-          afns.add(null);
-      }
-  }
+            afns.add(null);
+        }
+    }
 
     public void crearBasico(char c) {
         Afn a = new Afn();
