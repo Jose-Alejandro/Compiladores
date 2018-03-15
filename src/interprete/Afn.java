@@ -326,4 +326,16 @@ public class Afn {
 
         return this;
     }
+    
+    public Afn unionEspecial(Afn f1) {
+        Estado nuevoIni = new Estado();
+
+        nuevoIni.setTransicion(Epsilon.epsilon, f1.estadoInicial);
+
+        this.estados.add(nuevoIni);
+        this.estadoInicial = nuevoIni;
+        this.alfabeto.addAll(f1.alfabeto);
+
+        return this;
+    }
 }

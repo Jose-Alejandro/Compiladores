@@ -37,9 +37,12 @@ public class Interfaz extends javax.swing.JFrame {
     private JLabel jLabel13;
     private JLabel jLabel14;
     private JLabel jLabel15;
+    private JLabel jLabel16;
+    private JLabel jLabel17;
     private JButton jButton10;
     private JTextField jTextField10;
     private JTextField jTextField11;
+    private JTextField jTextField12;
     private JPanel contenedorVentana;
     private JPanel contenedorTop;
     private JPanel contenedorMiddle;
@@ -49,8 +52,10 @@ public class Interfaz extends javax.swing.JFrame {
     private JComboBox select3;
     private Ventana v;
     public Interprete inter;
+    public Afn afnUnionEspecial;
     
     public Interfaz() {
+        afnUnionEspecial =  new Afn();
         inter = new Interprete();
         initComponents();
         inicializar();
@@ -70,6 +75,8 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel13 = new JLabel("Aplicar a: ");
         jLabel14 = new JLabel("Min: ");
         jLabel15 = new JLabel("Max: ");
+        jLabel16 = new JLabel("Token: ");
+        jLabel17 = new JLabel("Realizar unión especial");
         jButton10 = new JButton("OK");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +85,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jTextField10 = new JTextField();
         jTextField11 = new JTextField();
+        jTextField12 = new JTextField();
         contenedorVentana =  new JPanel();
         contenedorTop =  new JPanel();
         contenedorMiddle =  new JPanel();
@@ -138,6 +146,9 @@ public class Interfaz extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -225,12 +236,39 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        jButton11.setText("Asignar token");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("Unión especial");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("AFN a AFD");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -245,7 +283,10 @@ public class Interfaz extends javax.swing.JFrame {
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -278,26 +319,35 @@ public class Interfaz extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel4)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton9)))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton9)
+                            .addComponent(jButton3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton13)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -488,9 +538,64 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if (evt.getSource() == jButton11){
+            v.setVisible(true);
+            v.setTitle("Asignar token");
+            
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
+            contenedorTop.setLayout(new GridLayout(1,2));
+            contenedorTop.add(jLabel16);
+            contenedorTop.add(jTextField12);
+            contenedorMiddle.setLayout(new GridLayout(1,2));
+            contenedorMiddle.add(jLabel11);
+            contenedorMiddle.add(select1);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
+            
+            v.setLayout(new GridLayout(3,1));
+            v.add(contenedorTop);
+            v.add(contenedorMiddle);
+            v.add(contenedorBottom);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        if (evt.getSource() == jButton12){
+            v.setVisible(true);
+            v.setTitle("Unión especial");
+            
+            contenedorTop.removeAll();
+            contenedorMiddle.removeAll();
+            contenedorBottom.removeAll();
+            contenedorTop.setLayout(new GridLayout(1,1));
+            contenedorTop.add(jLabel17);
+            contenedorMiddle.setLayout(new GridLayout(1,2));
+            contenedorMiddle.add(jLabel13);
+            contenedorMiddle.add(select1);
+            contenedorBottom.setLayout(new GridLayout(1,1));
+            contenedorBottom.add(jButton10);
+            
+            v.setLayout(new GridLayout(3,1));
+            v.add(contenedorTop);
+            v.add(contenedorMiddle);
+            v.add(contenedorBottom);
+        }
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        if (evt.getSource() == jButton13){
+            System.out.println("AFN a AFD");
+            Afd afd = new Afd();
+            afd.AfnToAfd(afnUnionEspecial);
+            afd.printTable();
+        }
+    }//GEN-LAST:event_jButton13ActionPerformed
+
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
         if (evt.getSource() == jButton10){
-            System.out.println("rer");
             String title = v.getTitle();
             String text, text2;
             int s1, s2, s3;
@@ -575,6 +680,22 @@ public class Interfaz extends javax.swing.JFrame {
                         inter.afns.set((int) s1, afn1);
                     }
                     break;
+                case "Asignar token":
+                    text = jTextField12.getText();
+                    s1 = select1.getSelectedIndex();
+                    Afn afn1 = inter.afns.get((int)s1);
+                    changeToken:for(Estado e : afn1.estadosAceptacion){
+                        e.setEstadoTrue(Integer.parseInt(text));
+                        break changeToken;
+                    }
+                    inter.afns.set((int)s1, afn1);
+                    break;
+                case "Unión especial":
+                    //afnUnionEspecial = afnUnionEspecial.unionEspecial(inter.afns.get((int)s1));
+                    s1 = select1.getSelectedIndex();
+                    Afn afn2 = inter.afns.get((int)s1);
+                    afnUnionEspecial.unionEspecial(afn2);
+                    break;
                 default: 
                     System.out.println("Error");
                     break;
@@ -622,6 +743,9 @@ public class Interfaz extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
