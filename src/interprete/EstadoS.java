@@ -35,5 +35,9 @@ public class EstadoS {
         this.transiciones = new HashSet();
         this.IdEdoAct++;
     }
+    
+    public HashSet<Estado> getEstados() {
+        return this.estados;
+    }
         
 }

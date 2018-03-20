@@ -30,7 +30,7 @@ public class Afn {
         this.setEstadoAceptacion();
     }*/
     public HashSet<Estado> cerraduraEpsilon(Estado e) {
-        System.out.println("\n=== Método cerraduraEpsilon ===");
+//        System.out.println("\n=== Método cerraduraEpsilon ===");
         HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones;
         Stack<Estado> pila = new Stack();
@@ -39,49 +39,49 @@ public class Afn {
         pila.push(e);
         while (!pila.empty()) {
             estado = pila.pop();
-            System.out.println("\nEstado en la pila: ");
-            estado.imprimirEstado();
+//            System.out.println("\nEstado en la pila: ");
+//            estado.imprimirEstado();
             if (!estados1.contains(estado)) {
-                System.out.println("\nAgrega estado");
+//                System.out.println("\nAgrega estado");
                 estados1.add(estado);
             }
             transiciones = estado.getTransiciones();
-            System.out.println("Transiciones: " + transiciones.size());
+//            System.out.println("Transiciones: " + transiciones.size());
 
             //ciclo para verificar si existen transiciones epsilon en el estado
             for (Transicion t : transiciones) {
                 if (t.getMaxSimb() == '|') {
-                    System.out.println("\nAgrega por Epsilon");
+//                    System.out.println("\nAgrega por Epsilon");
                     pila.push(t.getEstado());
                 }
             }
         }
 
-        for (Estado es : estados1) {
-            System.out.println("\nEstadoCeEp ");
-            es.imprimirEstado();
-        }
+//        for (Estado es : estados1) {
+//            System.out.println("\nEstadoCeEp ");
+//            es.imprimirEstado();
+//        }
         return estados1;
     }
 
     public HashSet<Estado> cerraduraEpsilon(HashSet<Estado> conjunto) {
-        System.out.println("\n=== Método cerradura Epsilon Conjunto ===");
+//        System.out.println("\n=== Método cerradura Epsilon Conjunto ===");
         HashSet<Estado> estados1 = new HashSet();
 
         for (Estado e : conjunto) {
             estados1.addAll(cerraduraEpsilon(e));
         }
 
-        for (Estado es : estados1) {
-            System.out.println("\nEstadoCeEpConj ");
-            es.imprimirEstado();
-        }
+//        for (Estado es : estados1) {
+//            System.out.println("\nEstadoCeEpConj ");
+//            es.imprimirEstado();
+//        }
         return estados1;
     }
 
     public HashSet<Estado> mover(Estado e, char c) {
-        System.out.println("\n=== Método mover ===");
-        e.imprimirEstado();
+//        System.out.println("\n=== Método mover ===");
+//        e.imprimirEstado();
         HashSet<Estado> estados1 = new HashSet();
         HashSet<Transicion> transiciones = e.getTransiciones();
 
@@ -92,43 +92,43 @@ public class Afn {
             }
         }
 
-        for (Estado es : estados1) {
-            System.out.println("\nEstadoMov ");
-            es.imprimirEstado();
-        }
+//        for (Estado es : estados1) {
+//            System.out.println("\nEstadoMov ");
+//            es.imprimirEstado();
+//        }
         return estados1;
     }
 
     public HashSet<Estado> irA(HashSet<Estado> conjunto, char c) {
-        System.out.println("\n=== Método irA ===");
+//        System.out.println("\n=== Método irA ===");
         HashSet<Estado> estados1 = new HashSet();
-        System.out.println("\nEstados en conjunto: " + conjunto.size());
+//        System.out.println("\nEstados en conjunto: " + conjunto.size());
 
         for (Estado e : conjunto) {
             estados1.addAll(mover(e, c));
         }
 
-        for (Estado e : estados1) {
-            System.out.println("\nEstadoIrA ");
-            e.imprimirEstado();
-        }
+//        for (Estado e : estados1) {
+//            System.out.println("\nEstadoIrA ");
+//            e.imprimirEstado();
+//        }
         return cerraduraEpsilon(estados1);
     }
 
     public boolean AnalizarCadena(String s) {
         HashSet<Estado> estados1, conjunto;
         int longitud;
-        System.out.println("\nEstado Inicial: ");
+//        System.out.println("\nEstado Inicial: ");
         this.estadoInicial.imprimirEstado();
         estados1 = cerraduraEpsilon(this.estadoInicial);
         longitud = s.length();
         //System.out.println("Longitud: " + longitud);
 
         for (int i = 0; i != longitud; i++) {
-            System.out.println("\nSímbolo a analizar: " + s.charAt(i));
+//            System.out.println("\nSímbolo a analizar: " + s.charAt(i));
             conjunto = irA(estados1, s.charAt(i));
             if (conjunto.isEmpty()) {
-                System.out.println("Analizar 1");
+//                System.out.println("Analizar 1");
                 return false;
             }
             estados1 = conjunto;
@@ -136,11 +136,11 @@ public class Afn {
 
         for (Estado e : estadosAceptacion) {
             if (estados1.contains(e)) {
-                System.out.println("Analizar 2");
+//                System.out.println("Analizar 2");
                 return true;
             }
         }
-        System.out.println("Analizar 3");
+//        System.out.println("Analizar 3");
         return false;
     }
 

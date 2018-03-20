@@ -13,16 +13,16 @@ public class Afd {
     ArrayList<String> alfabeto;
     ArrayList< ArrayList<Integer>> tabla;
     */
-    HashSet<EstadoS> estados;
-    HashSet<EstadoS> estadosAceptacion;
+    ArrayList<EstadoS> estados;
+    ArrayList<EstadoS> estadosAceptacion;
     EstadoS estadoInicial;
     ArrayList<String> alfabeto;
     ArrayList<ArrayList<Integer>> tabla;
 
     public Afd() {
         this.alfabeto = new ArrayList();
-        this.estados = new HashSet();
-        this.estadosAceptacion = new HashSet();
+        this.estados = new ArrayList();
+        this.estadosAceptacion = new ArrayList();
         this.estadoInicial = new EstadoS();
         this.tabla = new ArrayList<>();
     }
@@ -102,27 +102,55 @@ public class Afd {
 
     public Afd AfnToAfd(Afn a1) {
         this.alfabeto.addAll(a1.alfabeto);
-        ArrayList<HashSet<Estado>> C = new ArrayList();
-        C.add(a1.cerraduraEpsilon(a1.getEstadoInicial()));//este sería S0
-        for (HashSet<Estado> aux : C) {
-            for (String simbolo : this.alfabeto) {
-                HashSet<Estado> tmp = new HashSet<Estado>();
-                tmp = a1.irA(aux, simbolo.charAt(0));
-                if (!C.contains(tmp) && tmp != null) {
-                    C.add(tmp); //posiblemente añadir Si a C
-                    int i = 0;
+        estadoInicial = new EstadoS(a1.cerraduraEpsilon(a1.getEstadoInicial()));
+        estados.add(estadoInicial);//este sería S0
+        for(int i=0; i != estados.size(); i++) {    // este for es el que se cicla
+            for(int j=0; j != this.alfabeto.size(); j++) {
+                HashSet<Estado> tmp = a1.irA(estados.get(i).getEstados(), this.alfabeto.get(j).charAt(0));
+                int c = 0;  //bandera para saber si ya existe temp en los conjuntos Si
+                if(tmp != null) {
+                    for(int l=0; l != estados.size(); l++) {    //Este ciclo es el que hay que acomodar para que compare con los conjuntos ya existentes
+                        if(estados.iterator().next().getEstados() == tmp) {
+                            c++;
+                            break;
+                        }
+                    }
+                } else {
+                    c++;
+                }
+                if(c == 0) {
+                    EstadoS si = new EstadoS(tmp);
+                    estados.add(si);
+                    System.out.println("agrega si");
                     ArrayList<Integer> fila = new ArrayList();
-                    while (i < this.alfabeto.size()) {
-                        fila.add(-1);   //Se inicializa un nuevo renglón para Si
+                    for(int k = 0; k != this.alfabeto.size(); k++) {
+                        fila.add(-1);
                     }
                     this.tabla.add(fila);
                 }
             }
         }
+        
+//        for (HashSet<Estado> aux : C) {
+//            for (String simbolo : this.alfabeto) {
+//                HashSet<Estado> tmp = new HashSet();
+//                tmp = a1.irA(aux, simbolo.charAt(0));
+//                if (!C.contains(tmp) && tmp != null) {
+//                    C.add(tmp); //posiblemente añadir Si a C
+//                    int i = 0;
+//                    ArrayList<Integer> fila = new ArrayList();
+//                    while (i < this.alfabeto.size()) {
+//                        fila.add(-1);   //Se inicializa un nuevo renglón para Si
+//                    }
+//                    this.tabla.add(fila);
+//                }
+//            }
+//        }
         return this;
     }
 
     public void printTable(){
+        System.out.println("Entra imprime");
         for (int i = 0; i < tabla.size(); i++) {
             System.out.print("size i: " + tabla.size());
             for (int j = 0; j < tabla.get(i).size(); j++) {

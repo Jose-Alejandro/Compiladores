@@ -590,6 +590,7 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("AFN a AFD");
             Afd afd = new Afd();
             afd.AfnToAfd(afnUnionEspecial);
+            System.out.println("antes de tabla");
             afd.printTable();
         }
     }//GEN-LAST:event_jButton13ActionPerformed
