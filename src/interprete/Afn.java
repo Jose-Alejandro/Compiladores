@@ -331,10 +331,17 @@ public class Afn {
         Estado nuevoIni = new Estado();
 
         nuevoIni.setTransicion(Epsilon.epsilon, f1.estadoInicial);
+        nuevoIni.setTransicion(Epsilon.epsilon, this.estadoInicial);
 
         this.estados.add(nuevoIni);
         this.estadoInicial = nuevoIni;
         this.alfabeto.addAll(f1.alfabeto);
+        for (Estado edo: f1.getEstadosAceptacion() ) {
+            this.estadosAceptacion.add(edo);
+        }
+        for (Estado edo: f1.estados ) {
+            this.estados.add(edo);
+        }
 
         return this;
     }
