@@ -10,12 +10,14 @@ public class Afd2 {
     HashSet<Estado> estadosAceptacion;
     Estado estadoInicial;
     ArrayList<String> alfabeto ;
-
+    ArrayList<ArrayList<Integer>> tabla1;
+    
     public Afd2() {
         this.alfabeto = new ArrayList();
         this.estados = new HashSet();
         this.estadosAceptacion = new HashSet();
         this.estadoInicial = new Estado();
+        this.tabla1=new ArrayList<ArrayList<Integer>>() ;
     }
 
     
@@ -68,6 +70,12 @@ public class Afd2 {
        
         
         //Variable para tabla e inicializarla con -1's
+        //Guardar en Tabla1 para regresala por "getTabla()"
         return tabla;
     }
+     
+     public ArrayList<ArrayList<Integer>> getTabla()
+     {
+         return tabla1;
+     }
 }
