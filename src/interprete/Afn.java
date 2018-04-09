@@ -345,4 +345,37 @@ public class Afn {
 
         return this;
     }
+    
+    public Afn unionEspecial(ArrayList<Afn> afns) {
+        Estado nuevoIni = new Estado();
+
+        for (int i = 0; i != afns.size(); i++) {
+            nuevoIni.setTransicion(Epsilon.epsilon, afns.get(i).estadoInicial);
+        }
+        nuevoIni.setTransicion(Epsilon.epsilon, this.estadoInicial);
+
+        this.estados.add(nuevoIni);
+        this.estadoInicial = nuevoIni;
+        for (int i = 0; i != afns.size(); i++) {
+            for(String s: afns.get(i).alfabeto) {
+                if(!this.alfabeto.contains(s)) {
+                    this.alfabeto.add(s);
+                }
+            }
+        }
+        for (int i = 0; i != afns.size(); i++) {
+            for (Estado edo: afns.get(i).getEstadosAceptacion() ) {
+                this.estadosAceptacion.add(edo);
+            }
+            for (Estado edo: afns.get(i).estados ) {
+                this.estados.add(edo);
+            }
+        }
+
+        return this;
+    }
+    
+    public void imprimeAlfabeto() {
+        System.out.println(this.alfabeto.toString());
+    }
 }

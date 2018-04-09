@@ -2,6 +2,7 @@ package interprete;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class Afd2 {
@@ -31,6 +32,12 @@ public class Afd2 {
         ArrayList<HashSet <Estado>> C=new ArrayList<HashSet <Estado>>();
         
         C.add(a1.cerraduraEpsilon(a1.getEstadoInicial()));//este sería S0
+        System.out.println("===Conjunto de Estados S0===");
+        Iterator i1 = C.get(0).iterator();
+        for (int j = 0; j != C.get(0).size(); j++) {
+            Estado e = (Estado)i1.next();
+            e.imprimirEstado();
+        }
         size=C.size();
        ArrayList<ArrayList<Integer> > tabla = new ArrayList<ArrayList<Integer> >();
         for (int i=0;i<size;i++){
@@ -43,6 +50,13 @@ public class Afd2 {
             if ( ( !C.contains(tmp) ) && (tmp.size()>0) )
             {
               C.add(tmp); //posiblemente añadir Si a C
+              System.out.println("===Conjunto de Estados===  " + size);
+              Iterator it = tmp.iterator();
+                for (int j = 0; j != tmp.size(); j++) {
+                    Estado e = (Estado)it.next();
+                    e.imprimirEstado();
+                }
+                System.out.println("\n");
               arr_tmp.add(C.size()-1);
               size++;
             }else if (C.contains(tmp)){
@@ -65,10 +79,6 @@ public class Afd2 {
           tabla.add(arr_tmp);
           
         }
-       
-      
-       
-        
         //Variable para tabla e inicializarla con -1's
         //Guardar en Tabla1 para regresala por "getTabla()"
         return tabla;
