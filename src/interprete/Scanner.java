@@ -31,6 +31,7 @@ public class Scanner
     }
     return false;
   }
+
   boolean EsLetra(char c)
   {
     if ( (c>='a' && c<='z' ) || (c>='A' && c<='Z' ) ){
@@ -38,8 +39,8 @@ public class Scanner
     }
     return false;
   }
-  public int GetToken()
-  {
+
+  public int GetToken() {
     ApAnt=ApAct;
     while( ApAct<CadenaEntrada.length() && (CadenaEntrada.charAt(ApAct)==' ' || CadenaEntrada.charAt(ApAct)=='\n' || CadenaEntrada.charAt(ApAct)=='a') )
     {
@@ -164,6 +165,10 @@ public class Scanner
   {
     switch(Token)
     {
+      case Tokens.FIN:
+        return "FIN";
+      case Tokens.ERROR:
+        return "ERROR";
       case Tokens.MAS:
         return "MAS";
       case Tokens.MENOS:
@@ -176,7 +181,24 @@ public class Scanner
         return "PAR_I";
       case Tokens.PAR_D:
         return "PAR_D";
-      
+      case Tokens.NUM:
+        return "NUM";
+      case Tokens.POTENCIA:
+        return "POTENCIA";
+      case Tokens.SENO:
+        return "SENO";
+      case Tokens.COSENO:
+        return "COSENO";
+      case Tokens.TANGENTE:
+        return "TANGENTE";
+      case Tokens.EXP:
+        return "EXP";
+      case Tokens.LN:
+        return "LN";
+      case Tokens.LOG:
+        return "LOG";
+      case Tokens.VAR:
+        return "VAR";
     }
     return "ERROR";
   }  
