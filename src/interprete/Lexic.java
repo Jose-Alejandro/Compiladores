@@ -7,7 +7,7 @@ import java.util.Stack;
 public class Lexic 
 {
 
-    int EdoActualLexema;
+    /*int EdoActualLexema;
     int CaracterActual = 0;
     boolean EdoAcept_Previo = false;
     int IndCaracterEdoAcept = 0;
@@ -65,6 +65,6 @@ public class Lexic
     public void returnToken(String Token)
     {
         pilaToken.push(Token);
-    }
+    }*/
 
 }

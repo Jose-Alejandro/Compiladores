@@ -40,127 +40,120 @@ public class Scanner
     return false;
   }
 
-  public int GetToken() {
-    ApAnt=ApAct;
-    while( ApAct<CadenaEntrada.length() && (CadenaEntrada.charAt(ApAct)==' ' || CadenaEntrada.charAt(ApAct)=='\n' || CadenaEntrada.charAt(ApAct)=='a') )
-    {
-      ApAct++;     
+  public int getToken() {
+    ApAnt = ApAct;
+    while (ApAct < CadenaEntrada.length() && (CadenaEntrada.charAt(ApAct) == ' ' || CadenaEntrada.charAt(ApAct) == '\n' || CadenaEntrada.charAt(ApAct) == '\0')) {
+      ApAct++;
     }
-    if (ApAct==CadenaEntrada.length())
-    {
-      Lexema="";
-      Token=Tokens.FIN;
+    if (ApAct == CadenaEntrada.length()) {
+      Lexema = "";
+      Token = Tokens.FIN;
       return Tokens.FIN;
     }
-    if (EsDigito( CadenaEntrada.charAt(ApAct) ) ) 
-    {
-      Lexema="";
-      while (ApAct<CadenaEntrada.length()&& EsDigito(CadenaEntrada.charAt(ApAct)))
-      {
-        Lexema=Lexema+CadenaEntrada.charAt(ApAct);
+    if (EsDigito(CadenaEntrada.charAt(ApAct))) {
+      Lexema = "";
+      while (ApAct < CadenaEntrada.length() && EsDigito(CadenaEntrada.charAt(ApAct))) {
+        Lexema = Lexema + CadenaEntrada.charAt(ApAct);
         ApAct++;
       }
-      if (ApAct<CadenaEntrada.length() && CadenaEntrada.charAt(ApAct)=='.' )
-      {
-        Lexema=Lexema+CadenaEntrada.charAt(ApAct);
+      if (ApAct < CadenaEntrada.length() && CadenaEntrada.charAt(ApAct) == '.') {
+        Lexema = Lexema + CadenaEntrada.charAt(ApAct);
         ApAct++;
-        while (ApAct<CadenaEntrada.length()&& EsDigito(CadenaEntrada.charAt(ApAct) ) )
-        {
-          Lexema=Lexema+CadenaEntrada.charAt(ApAct);
+        while (ApAct < CadenaEntrada.length() && EsDigito(CadenaEntrada.charAt(ApAct))) {
+          Lexema = Lexema + CadenaEntrada.charAt(ApAct);
           ApAct++;
         }
       }
-      Token=Tokens.NUM;
+      Token = Tokens.NUM;
       return Tokens.NUM;
     }
-    if ( EsLetra(CadenaEntrada.charAt(ApAct) ) )
-    {
-      Lexema="";
-      while (EsLetra(CadenaEntrada.charAt(ApAct)) || EsDigito(CadenaEntrada.charAt(ApAct) ) )
-      {
-        Lexema=Lexema+CadenaEntrada.charAt(ApAct);
+    if (EsLetra(CadenaEntrada.charAt(ApAct))) {
+      Lexema = "";
+      while (EsLetra(CadenaEntrada.charAt(ApAct)) || EsDigito(CadenaEntrada.charAt(ApAct))) {
+        Lexema = Lexema + CadenaEntrada.charAt(ApAct);
         ApAct++;
       }
-      if (Lexema.toUpperCase().equals("SENO") )
-      {
-        Token=Tokens.SENO;
+      if (Lexema.toUpperCase().equals("SENO")) {
+        Token = Tokens.SENO;
         return Tokens.SENO;
       }
-      if (Lexema.toUpperCase().equals("COSENO") )
-      {
-        Token=Tokens.COSENO;
+      if (Lexema.toUpperCase().equals("COSENO")) {
+        Token = Tokens.COSENO;
         return Tokens.COSENO;
       }
-      if (Lexema.toUpperCase().equals("TANGENTE") )
-      {
-        Token=Tokens.TANGENTE;
+      if (Lexema.toUpperCase().equals("TANGENTE")) {
+        Token = Tokens.TANGENTE;
         return Tokens.TANGENTE;
       }
-      if (Lexema.toUpperCase().equals("EXP") )
-      {
-        Token=Tokens.EXP;
+      if (Lexema.toUpperCase().equals("EXP")) {
+        Token = Tokens.EXP;
         return Tokens.EXP;
       }
-      if (Lexema.toUpperCase().equals("LN") )
-      {
-        Token=Tokens.LN;
+      if (Lexema.toUpperCase().equals("LN")) {
+        Token = Tokens.LN;
         return Tokens.LN;
       }
-      if (Lexema.toUpperCase().equals("LOG") )
-      {
-        Token=Tokens.LOG;
+      if (Lexema.toUpperCase().equals("LOG")) {
+        Token = Tokens.LOG;
         return Tokens.LOG;
       }
-      if (Lexema.toUpperCase().equals("VAR") )
-      {
-        Token=Tokens.VAR;
+      if (Lexema.toUpperCase().equals("VAR")) {
+        Token = Tokens.VAR;
         return Tokens.VAR;
       }
-      Token=Tokens.ERROR;
+      Token = Tokens.ERROR;
     }
-    switch (CadenaEntrada.charAt(ApAct))
-    {
+    switch (CadenaEntrada.charAt(ApAct)) {
       case '+':
-        Lexema="+";
+        Lexema = "+";
         ApAct++;
-        Token=Tokens.MAS;
+        Token = Tokens.MAS;
         return Tokens.MAS;
       case '-':
-        Lexema="-";
+        Lexema = "-";
         ApAct++;
-        Token=Tokens.MENOS;
+        Token = Tokens.MENOS;
         return Tokens.MENOS;
       case '*':
-        Lexema="*";
+        Lexema = "*";
         ApAct++;
-        Token=Tokens.PROD;
+        Token = Tokens.PROD;
         return Tokens.PROD;
       case '/':
-        Lexema="/";
+        Lexema = "/";
         ApAct++;
-        Token=Tokens.DIV;
+        Token = Tokens.DIV;
         return Tokens.DIV;
       case '(':
-        Lexema="(";
+        Lexema = "(";
         ApAct++;
-        Token=Tokens.PAR_I;
+        Token = Tokens.PAR_I;
         return Tokens.PAR_I;
       case ')':
-        Lexema=")";
+        Lexema = ")";
         ApAct++;
-        Token=Tokens.PAR_D;
+        Token = Tokens.PAR_D;
         return Tokens.PAR_D;
       case '^':
-        Lexema="^";
+        Lexema = "^";
         ApAct++;
-        Token=Tokens.POTENCIA;
+        Token = Tokens.POTENCIA;
         return Tokens.POTENCIA;
     }
-    Lexema=""+CadenaEntrada.charAt(ApAct);
+    Lexema = "" + CadenaEntrada.charAt(ApAct);
     ApAct++;
-    Token=Tokens.ERROR;
+    Token = Tokens.ERROR;
     return Tokens.ERROR;
   }
+
+  public String getLexema(){
+    return Lexema;
+  }
+
+  public void regresarToken(){
+    ApAct=ApAnt;
+  }
+
   public String CadenaToken()
   {
     switch(Token)

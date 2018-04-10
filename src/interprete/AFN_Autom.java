@@ -2,7 +2,9 @@ package interprete;
 import java.util.HashSet;
 
 public class AFN_Autom {
-  boolean E(Afn f){
+  Scanner lexic=new Scanner("(52*2)+4");
+
+  /*boolean E(Afn f){
     if (T(f)){
       if (Ep(f))
         return true;
@@ -14,7 +16,7 @@ public class AFN_Autom {
     int tok;
     Afn f1;
     tok=lexic.getToken();
-    if (tok==tokens.OR){
+    if (tok==Tokens.OR){
       if (T(f1)){
         f.unirAfn(f1);
         if (Ep(f))
@@ -97,5 +99,5 @@ public class AFN_Autom {
         return true;
     }
     return false;
-  }
+  }*/
 }
