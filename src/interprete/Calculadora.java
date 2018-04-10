@@ -64,9 +64,19 @@ public class Calculadora {
   {
     int tok=Lexic.getToken();
     Mfloat v1=new Mfloat();
-    if (tok==Tokens.PROD||tok==Tokens.DIV){
+    if (tok==Tokens.PROD||tok==Tokens.DIV || tok==Tokens.POTENCIA){
       if (F(v1)){
-        v.v=v.v*(tok==Tokens.PROD?v1.v:1/v1.v);
+        switch (tok){
+          case Tokens.PROD:
+            v.v*=v1.v;
+            break;
+          case Tokens.DIV:
+            v.v/=v1.v;
+            break;
+          case  Tokens.POTENCIA:
+            v.v= (float) Math.pow(v.v,v1.v);
+            break;
+        }
         if (Tp(v))
           return true;
       }
@@ -80,6 +90,90 @@ public class Calculadora {
   {
     int tok=Lexic.getToken();
     switch (tok){
+      case Tokens.SENO:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.sin(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
+      case Tokens.COSENO:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.cos(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
+      case Tokens.TANGENTE:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.tan(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
+      case Tokens.EXP:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.exp(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
+      case Tokens.LN:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.log(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
+      case Tokens.LOG:
+        tok=Lexic.getToken();
+        switch (tok){
+          case Tokens.PAR_I:
+            if (E(v))
+            {
+              tok=Lexic.getToken();
+              if (tok==Tokens.PAR_D){
+                v.v= (float) Math.log10(v.v);
+                return true;
+              }
+            }
+            return false;
+        }
       case Tokens.PAR_I:
         if (E(v))
         {
