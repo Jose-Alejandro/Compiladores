@@ -126,8 +126,8 @@ public class Calculadora {
               tok=Lexic.getToken();
               if (tok==Tokens.PAR_D){
                 v.v= (float) Math.sin(v.v);
-                pos.s+=" "+"sin";
-                pre.s="sin "+pre.s;
+                pos.s+=" "+"seno";
+                pre.s="seno "+pre.s;
                 return true;
               }
             }
@@ -142,8 +142,8 @@ public class Calculadora {
               tok=Lexic.getToken();
               if (tok==Tokens.PAR_D){
                 v.v= (float) Math.cos(v.v);
-                pos.s+=" "+"cos";
-                pre.s="cos "+pre.s;
+                pos.s+=" "+"coseno";
+                pre.s="coseno "+pre.s;
                 return true;
               }
             }
@@ -158,8 +158,8 @@ public class Calculadora {
               tok=Lexic.getToken();
               if (tok==Tokens.PAR_D){
                 v.v= (float) Math.tan(v.v);
-                pos.s+=" "+"tan";
-                pre.s="tan "+pre.s;
+                pos.s+=" "+"tangente";
+                pre.s="tangente "+pre.s;
                 return true;
               }
             }
