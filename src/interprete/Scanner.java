@@ -12,7 +12,7 @@ public class Scanner
     this.ApIniLexema = 0;
     this.ApAnt = -1;
     this.Lexema = "";
-    this.CadenaEntrada = CadenaEntrada;
+    this.CadenaEntrada = CadenaEntrada+" ";
   }
 
   public Scanner() 
@@ -42,7 +42,7 @@ public class Scanner
 
   public int getToken() {
     ApAnt = ApAct;
-    while (ApAct < CadenaEntrada.length() && (CadenaEntrada.charAt(ApAct) == ' ' || CadenaEntrada.charAt(ApAct) == '\n' || CadenaEntrada.charAt(ApAct) == '\0')) {
+    while (ApAct < CadenaEntrada.length() && (CadenaEntrada.charAt(ApAct) == ' ' || CadenaEntrada.charAt(ApAct) == '\n' || CadenaEntrada.charAt(ApAct) == '\r')) {
       ApAct++;
     }
     if (ApAct == CadenaEntrada.length()) {

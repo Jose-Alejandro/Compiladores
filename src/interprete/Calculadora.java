@@ -196,6 +196,8 @@ public class Calculadora {
               }
             }
             return false;
+          default:
+            return false;
         }
       case Tokens.LOG:
         tok=Lexic.getToken();
