@@ -29,13 +29,15 @@ public class Lexic {
         pilaToken = new Stack<>();
     }
 
-    public boolean AnalizarLexema(String inCadena) {
+    public boolean AnalizarLexema(String inCadena, char[] inAlf, int inTab[][]) {
 
-        char alfabeto[] = {'S', 'D', 'L', '.', 'E', ' '};
+        //char alfabeto[] = {'S', 'D', 'L', '.', 'E', ' '};
+        char alfabeto[]=inAlf;
         char cadena[];
         Lexema = inCadena;
         cadena = Lexema.toCharArray();
-        int tabla[][] = {
+        int tabla[][]=inTab;
+        /*int tabla[][] = {
         {1, 2, 3, -1, 4, -1}, //0
         {-1, 2, -1, -1, -1, -1}, //1
         {-1, 2, -1, 5, -1, 10}, //2 
@@ -46,6 +48,7 @@ public class Lexic {
         {-1, 6, 7, -1, -1, 30}, //7
         {-1, 8, -1, -1, -1, 20} //8
         }; //[Fila][Columna]
+        */
         int i, j, k = 0, longitudLexema; //i=Carater actual que se esta analizando.
         int longitudColumna = tabla[EdoActualLexema].length - 1;
         longitudLexema = Lexema.length();
