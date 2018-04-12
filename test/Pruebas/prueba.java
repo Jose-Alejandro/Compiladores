@@ -65,7 +65,7 @@ public class prueba
     //Se manda llamar a la unión especial que une cualquier número de afns
     ArrayList<Afn> afns = new ArrayList();
     afns.add(afn3);
-    afns.add(afn5);
+    afns.add(afn7);
     afns.add(afn8);
     afn1.unionEspecial(afns);
     Afd2 afd2=new Afd2();
