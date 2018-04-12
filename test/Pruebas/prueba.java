@@ -77,12 +77,13 @@ public class prueba
     
     System.out.println("====Tabla====" + tabla.size());
     
-    for(int i=0; i != tabla.size(); i++) {
-        for (int j = 0; j != tabla.get(i).size(); j++) {
-            System.out.print(tabla.get(i).get(j) + "  ");
-        }
-        System.out.println();
-    }
+//    for(int i=0; i != tabla.size(); i++) {
+//        for (int j = 0; j != tabla.get(i).size(); j++) {
+//            System.out.print(tabla.get(i).get(j) + "  ");
+//        }
+//        System.out.println();
+//    }
+        afd2.imprimirTabla();
     
   }
   

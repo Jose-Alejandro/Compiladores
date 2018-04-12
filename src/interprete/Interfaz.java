@@ -355,6 +355,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (evt.getSource() == jButton2){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Unir AFN's");
             
@@ -380,6 +381,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (evt.getSource() == jButton3){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Concatenar AFN's");
             
@@ -405,6 +407,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (evt.getSource() == jButton6){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Operación ?");
             
@@ -428,6 +431,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (evt.getSource() == jButton1){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Crear AFN básico");                   // colocamos titulo a la ventana
             
@@ -457,6 +461,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (evt.getSource() == jButton4){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Operación cerradura +");
             v.remove(contenedorMiddle);
@@ -478,6 +483,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (evt.getSource() == jButton5){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Operación cerradura *");
             v.remove(contenedorMiddle);
@@ -503,9 +509,9 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
-                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena cumple la expresión regular");
             }else{
-                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena NO cumple la expresión regular");
             }
         }
     }//GEN-LAST:event_jButton7ActionPerformed
@@ -517,9 +523,9 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
-                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena cumple la expresión regular");
             }else{
-                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena NO cumple la expresión regular");
             }
         }
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -531,15 +537,16 @@ public class Interfaz extends javax.swing.JFrame {
             System.out.println("text: " + text);
             System.out.println("isOK: " + isOK);
             if(isOK){
-                JOptionPane.showMessageDialog(null, "La cadena cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena cumple la expresión regular");
             }else{
-                JOptionPane.showMessageDialog(null, "La cadena NO cumple la expresión regular");
+                JOptionPane.showMessageDialog(this, "La cadena NO cumple la expresión regular");
             }
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if (evt.getSource() == jButton11){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Asignar token");
             
@@ -564,6 +571,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         if (evt.getSource() == jButton12){
+            v.setLocationRelativeTo(this);                       // centramos la ventana en la pantalla
             v.setVisible(true);
             v.setTitle("Unión especial");
             
@@ -588,10 +596,9 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         if (evt.getSource() == jButton13){
             System.out.println("AFN a AFD");
-            Afd afd = new Afd();
-            afd.AfnToAfd(afnUnionEspecial);
-            System.out.println("antes de tabla");
-            afd.printTable();
+            Afd2 afd2 = new Afd2();
+            afd2.AfnToAfd(afnUnionEspecial);
+            afd2.imprimirTabla();
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 

@@ -335,7 +335,12 @@ public class Afn {
 
         this.estados.add(nuevoIni);
         this.estadoInicial = nuevoIni;
-        this.alfabeto.addAll(f1.alfabeto);
+        //this.alfabeto.addAll(f1.alfabeto);
+        for(String s : f1.alfabeto) {
+            if(!this.alfabeto.contains(s)) {
+                this.alfabeto.add(s);
+            }
+        }
         for (Estado edo: f1.getEstadosAceptacion() ) {
             this.estadosAceptacion.add(edo);
         }

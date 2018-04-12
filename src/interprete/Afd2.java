@@ -1,6 +1,7 @@
 package interprete;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -39,7 +40,7 @@ public class Afd2 {
             e.imprimirEstado();
         }
         size=C.size();
-       ArrayList<ArrayList<Integer> > tabla = new ArrayList<ArrayList<Integer> >();
+        //ArrayList<ArrayList<Integer> > tabla1 = new ArrayList<ArrayList<Integer> >();
         for (int i=0;i<size;i++){
           ArrayList<Integer> arr_tmp=new ArrayList<Integer>();
           aux=C.get(i);
@@ -76,16 +77,45 @@ public class Afd2 {
           }
           if(acep==false)
             arr_tmp.add(-1);
-          tabla.add(arr_tmp);
+          tabla1.add(arr_tmp);
           
         }
         //Variable para tabla e inicializarla con -1's
         //Guardar en Tabla1 para regresala por "getTabla()"
-        return tabla;
+        return tabla1;
     }
      
      public ArrayList<ArrayList<Integer>> getTabla()
      {
          return tabla1;
      }
+    
+    public void imprimirTabla(){
+        System.out.println("======== REPRESENTACION TABULAR ========");
+        
+        String line = "";
+        for(int i = 0; i < this.alfabeto.size(); i++) {
+            line += "-----+";
+        }
+        line = "+----------+" + line + "-----+";
+        
+        System.out.println("");
+        System.out.println(line);
+        System.out.print("|  Estados |");
+        for (String s : this.alfabeto) {
+            System.out.printf(" %3s |", s);
+        }
+        System.out.printf("%s|", "Token");
+        
+        System.out.println("");
+        System.out.println(line);
+        for(int i=0; i != tabla1.size(); i++){
+            System.out.printf("|    %2d    |", i );
+            for (int j = 0; j != tabla1.get(i).size(); j++){
+                System.out.printf(" %3s |", tabla1.get(i).get(j));
+            }
+            System.out.println("");
+            System.out.println(line);
+        }
+    }
 }
