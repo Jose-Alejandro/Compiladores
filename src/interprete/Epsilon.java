@@ -11,5 +11,5 @@ package interprete;
  */
 public class Epsilon 
 {
-    static char epsilon = '|';  
+    static char epsilon = '€';  
 }
