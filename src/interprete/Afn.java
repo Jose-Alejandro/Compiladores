@@ -50,7 +50,7 @@ public class Afn {
 
             //ciclo para verificar si existen transiciones epsilon en el estado
             for (Transicion t : transiciones) {
-                if (t.getMaxSimb() == '|') {
+                if (t.getMaxSimb() == '€') {
 //                    System.out.println("\nAgrega por Epsilon");
                     pila.push(t.getEstado());
                 }
