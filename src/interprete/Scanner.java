@@ -101,7 +101,8 @@ public class Scanner
         Token = Tokens.VAR;
         return Tokens.VAR;
       }
-      Token = Tokens.ERROR;
+      Token = Tokens.SIMB;
+      return Tokens.SIMB;
     }
     switch (CadenaEntrada.charAt(ApAct)) {
       case '+':
@@ -139,6 +140,21 @@ public class Scanner
         ApAct++;
         Token = Tokens.POTENCIA;
         return Tokens.POTENCIA;
+      case '|':
+        Lexema = "|";
+        ApAct++;
+        Token = Tokens.OR;
+        return Tokens.OR;
+      case '&':
+        Lexema = "&";
+        ApAct++;
+        Token = Tokens.CONC;
+        return Tokens.CONC;
+      case '?':
+        Lexema = "?";
+        ApAct++;
+        Token = Tokens.OPC;
+        return Tokens.OPC;
     }
     Lexema = "" + CadenaEntrada.charAt(ApAct);
     ApAct++;

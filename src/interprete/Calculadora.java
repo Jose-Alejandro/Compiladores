@@ -14,6 +14,8 @@ public class Calculadora {
   public float result;
   public String posfijo="",prefijo="";
   public MString pos=new MString(),pre=new MString();
+
+
   public Calculadora(String cadena){
     this.Lexic=new Scanner(cadena);
   }
