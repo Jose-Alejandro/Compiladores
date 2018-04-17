@@ -21,4 +21,11 @@ public class Tokens
   public static final int LN=130;
   public static final int LOG=140;
   public static final int VAR=150;
+  public static final int OR=160;
+  public static final int CONC=170;
+  public static final int OPC=180;
+  public static final int SIMB=190;
+
+
+
 }

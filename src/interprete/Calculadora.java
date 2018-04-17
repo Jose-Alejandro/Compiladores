@@ -14,6 +14,8 @@ public class Calculadora {
   public float result;
   public String posfijo="",prefijo="";
   public MString pos=new MString(),pre=new MString();
+
+
   public Calculadora(String cadena){
     this.Lexic=new Scanner(cadena);
   }
@@ -26,8 +28,8 @@ public class Calculadora {
     if (R){
       if (Lexic.getToken()==Tokens.FIN){
         result=v.v;
-        prefijo=pre.s;
-        posfijo=pos.s;
+        prefijo=pos.s;
+        posfijo=pre.s;
         return R;
       }
       else

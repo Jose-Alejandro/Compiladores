@@ -2,9 +2,31 @@ package interprete;
 import java.util.HashSet;
 
 public class AFN_Autom {
-  Scanner lexic=new Scanner("(52*2)+4");
+  Scanner lexic;
+  Afn f=new Afn();
+  public Afn result=new Afn();
 
-  /*boolean E(Afn f){
+  public AFN_Autom(String expresion)
+  {
+    this.lexic=new Scanner(expresion);
+  }
+
+  public boolean analizar()
+  {
+    boolean R=E(this.f);
+    if (R){
+      if (lexic.getToken()==Tokens.FIN){
+        result=f;
+        return R;
+      }else
+        return false;
+    }
+    return R;
+  }
+
+
+
+  boolean E(Afn f){
     if (T(f)){
       if (Ep(f))
         return true;
@@ -14,7 +36,7 @@ public class AFN_Autom {
 
   boolean Ep(Afn f){
     int tok;
-    Afn f1;
+    Afn f1=new Afn();
     tok=lexic.getToken();
     if (tok==Tokens.OR){
       if (T(f1)){
@@ -38,9 +60,9 @@ public class AFN_Autom {
 
   boolean Tp(Afn f){
     int tok;
-    Afn f1;
+    Afn f1=new Afn();
     tok=lexic.getToken();
-    if (tok==tokens.CONC){
+    if (tok==Tokens.CONC){
       if (C(f1)){
         f.ConcatenarAfn(f1);
         if (Tp(f))
@@ -65,13 +87,13 @@ public class AFN_Autom {
   boolean Cp(Afn f){
     int tok=lexic.getToken();
     switch (tok){
-      case tokens.MAS:
+      case Tokens.MAS:
         f.cerrMas();
         break;
-      case tokens.PROD:
+      case Tokens.PROD:
         f.cerrEstrella();
         break;
-      case tokens.OPC:
+      case Tokens.OPC:
         f.Opcional();
         break;
       default:
@@ -87,17 +109,17 @@ public class AFN_Autom {
   boolean F(Afn f){
     int tok=lexic.getToken();
     switch (tok){
-      case tokens.PARI:
+      case Tokens.PAR_I:
         if (E(f)){
           tok=lexic.getToken();
-          if (tok==tokens.PAR_D)
+          if (tok==Tokens.PAR_D)
             return true;
         }
         return false;
-      case tokens.SIMB:
-        f.AfnBasico(lexic.lexema.charAt(0));
+      case Tokens.SIMB:
+        f.AfnBasico(lexic.getLexema().charAt(0));
         return true;
     }
     return false;
-  }*/
+  }
 }

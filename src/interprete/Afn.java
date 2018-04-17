@@ -234,6 +234,12 @@ public class Afn {
             e.EdoAcept = false;
         }
 
+        for(String s : f2.alfabeto) {
+            if(!this.alfabeto.contains(s)) {
+                this.alfabeto.add(s);
+            }
+        }
+
         nuevoFin.setEstadoTrue();
         this.estados.add(nuevoIni);
         this.estados.add(nuevoFin);
@@ -306,6 +312,11 @@ public class Afn {
         this.estadosAceptacion.addAll(f2.estadosAceptacion);
         this.alfabeto.addAll(f2.alfabeto);
         this.estados.addAll(f2.estados);
+        for(String s : f2.alfabeto) {
+            if(!this.alfabeto.contains(s)) {
+                this.alfabeto.add(s);
+            }
+        }
         f2 = null;
 
         return this;
