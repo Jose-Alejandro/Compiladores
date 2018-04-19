@@ -215,6 +215,10 @@ public class InterfazCalculadora extends javax.swing.JFrame {
                 System.out.println("Entrada: " + (String) jTextField5.getText());
                 System.out.println("Bool: " + isOK );
                 
+                // (a&b)+&z
+                // ababz -- valida
+                // ababzz --NO valida
+                
                 if(isOK){
                     JOptionPane.showMessageDialog(this, "La cadena ES válida");
                 }else{
