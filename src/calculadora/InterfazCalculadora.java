@@ -205,10 +205,10 @@ public class InterfazCalculadora extends javax.swing.JFrame {
                 }
                 break;
             case 2:
-                AFN_Autom regul = new AFN_Autom("(a&b)+&z");
+                AFN_Autom regul = new AFN_Autom( (String) jTextField1.getText() );
                 regul.analizar();
-                //isOK = regul.result.AnalizarCadena( (String) jTextField5.getText() );
-                isOK = regul.result.AnalizarCadena( "ababzz" );
+                isOK = regul.result.AnalizarCadena( (String) jTextField5.getText() );
+                //isOK = regul.result.AnalizarCadena( "ababzz" );
                 
                 System.out.println("Entradas:");
                 System.out.println("Cadena: " + (String) jTextField1.getText());
