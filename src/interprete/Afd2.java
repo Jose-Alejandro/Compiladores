@@ -8,11 +8,11 @@ import java.util.Iterator;
 
 public class Afd2 {
 
-    HashSet<Estado> estados;
-    HashSet<Estado> estadosAceptacion;
-    Estado estadoInicial;
-    ArrayList<String> alfabeto ;
-    ArrayList<ArrayList<Integer>> tabla1;
+    public HashSet<Estado> estados;
+    public HashSet<Estado> estadosAceptacion;
+    public Estado estadoInicial;
+    public ArrayList<String> alfabeto ;
+    public ArrayList<ArrayList<Integer>> tabla1;
     
     public Afd2() {
         this.alfabeto = new ArrayList();

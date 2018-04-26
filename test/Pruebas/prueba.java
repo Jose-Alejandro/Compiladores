@@ -84,6 +84,13 @@ public class prueba
 //        System.out.println();
 //    }
         afd2.imprimirTabla();
+        
+        Lexic lexic = new Lexic();
+        boolean ok = lexic.AnalizarLexema("s0.0s0.0", afd2.alfabeto , afd2.getTabla() );
+        System.out.println("===== Tokens =====");
+        System.out.println("ok: " + ok);
+        String tokens = lexic.ImprimeTokens("");
+        System.out.println("tokens: " + tokens);
     
   }
   
