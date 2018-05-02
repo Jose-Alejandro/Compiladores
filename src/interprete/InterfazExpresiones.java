@@ -5,6 +5,11 @@
  */
 package interprete;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author FernandoEsteban
@@ -14,8 +19,27 @@ public class InterfazExpresiones extends javax.swing.JFrame {
     /**
      * Creates new form InterfazExpresiones
      */
+    ArrayList<Afn> afns;
+    ArrayList<String> expresiones;
+    int index;
+    int indexSelected;
+    DefaultListModel modelListaAutomatas;
+    Afn afnUnionEspecial;
+    Afd2 afd; 
+    
     public InterfazExpresiones() {
+        init();
         initComponents();
+    }
+    
+    public void init(){
+        afns =  new ArrayList<>();
+        expresiones =  new ArrayList<>();
+        index = 0;
+        indexSelected = -1;
+        modelListaAutomatas = new DefaultListModel();
+        listaAutomatas = new JList<>(modelListaAutomatas);
+        afnUnionEspecial =  new Afn();
     }
 
     /**
@@ -27,21 +51,310 @@ public class InterfazExpresiones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaAutomatas = new javax.swing.JList<>();
+        labelTituloExpresion = new javax.swing.JLabel();
+        labelExpresionAFN = new javax.swing.JLabel();
+        labelEntradaAFN = new javax.swing.JLabel();
+        labelTokenAFN = new javax.swing.JLabel();
+        inExpresionAFN = new javax.swing.JTextField();
+        inEntradaAFN = new javax.swing.JTextField();
+        inTokenAFN = new javax.swing.JTextField();
+        btnAgregarAFN = new javax.swing.JButton();
+        btnAnalizarAFN = new javax.swing.JButton();
+        btnEliminarAFN = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        btnUnionEspecial = new javax.swing.JButton();
+        btnAFNToAFD = new javax.swing.JButton();
+        labelEntradaAFD = new javax.swing.JLabel();
+        labelTokensAFD = new javax.swing.JLabel();
+        inEntradaAFD = new javax.swing.JTextField();
+        outTokensAFD = new javax.swing.JTextField();
+        btnAnalizarAFD = new javax.swing.JButton();
+        labelTituloAnalizadorLexico = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        listaAutomatas.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaAutomatasValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaAutomatas);
+
+        labelTituloExpresion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labelTituloExpresion.setText("Expresión");
+
+        labelExpresionAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelExpresionAFN.setText("Expresión:");
+
+        labelEntradaAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelEntradaAFN.setText("Entrada:");
+
+        labelTokenAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTokenAFN.setText("Token:");
+
+        inExpresionAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        inEntradaAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        inTokenAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnAgregarAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAgregarAFN.setText("Agregar");
+        btnAgregarAFN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAFNActionPerformed(evt);
+            }
+        });
+
+        btnAnalizarAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAnalizarAFN.setText("Analizar");
+        btnAnalizarAFN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarAFNActionPerformed(evt);
+            }
+        });
+
+        btnEliminarAFN.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnEliminarAFN.setText("Eliminar");
+        btnEliminarAFN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAFNActionPerformed(evt);
+            }
+        });
+
+        btnUnionEspecial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnUnionEspecial.setText("Unión Especial");
+        btnUnionEspecial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnionEspecialActionPerformed(evt);
+            }
+        });
+
+        btnAFNToAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAFNToAFD.setText("AFN a AFD");
+        btnAFNToAFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAFNToAFDActionPerformed(evt);
+            }
+        });
+
+        labelEntradaAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelEntradaAFD.setText("Entrada:");
+
+        labelTokensAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelTokensAFD.setText("Tokens:");
+
+        inEntradaAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        inEntradaAFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inEntradaAFDActionPerformed(evt);
+            }
+        });
+
+        outTokensAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        btnAnalizarAFD.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAnalizarAFD.setText("Analizar");
+        btnAnalizarAFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalizarAFDActionPerformed(evt);
+            }
+        });
+
+        labelTituloAnalizadorLexico.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labelTituloAnalizadorLexico.setText("Analizador léxico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTituloExpresion)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnEliminarAFN)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnAgregarAFN)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnAnalizarAFN))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelExpresionAFN)
+                                        .addComponent(labelTokenAFN)
+                                        .addComponent(labelEntradaAFN))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(inExpresionAFN)
+                                        .addComponent(inEntradaAFN)
+                                        .addComponent(inTokenAFN, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(labelEntradaAFD)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(inEntradaAFD, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnAnalizarAFD)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(labelTokensAFD)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(outTokensAFD, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(labelTituloAnalizadorLexico))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(btnUnionEspecial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAFNToAFD)
+                        .addGap(93, 93, 93))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelTituloExpresion)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelExpresionAFN)
+                            .addComponent(inExpresionAFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEntradaAFN)
+                            .addComponent(inEntradaAFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelTokenAFN)
+                            .addComponent(inTokenAFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregarAFN)
+                            .addComponent(btnAnalizarAFN)
+                            .addComponent(btnEliminarAFN))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUnionEspecial)
+                            .addComponent(btnAFNToAFD))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(labelTituloAnalizadorLexico)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelEntradaAFD)
+                            .addComponent(inEntradaAFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(outTokensAFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelTokensAFD))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAnalizarAFD)
+                        .addGap(22, 22, 22))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void inEntradaAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inEntradaAFDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inEntradaAFDActionPerformed
+
+    private void btnAgregarAFNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAFNActionPerformed
+        AFN_Autom regul = new AFN_Autom( (String) inExpresionAFN.getText() );
+        boolean isOK = regul.analizar();
+        if(isOK){
+            regul.result.expresion = (String) inExpresionAFN.getText();
+            for(Estado e : regul.result.estadosAceptacion){
+                e.setEstadoTrue(Integer.parseInt( (String) inTokenAFN.getText() ));
+                break;
+            }
+            afns.add(regul.result);
+            expresiones.add(regul.result.expresion);
+            modelListaAutomatas.add(index, regul.result.expresion);
+            listaAutomatas.setModel(modelListaAutomatas);
+            index += 1;
+            
+            inExpresionAFN.setText("");
+            inEntradaAFN.setText("");
+            inTokenAFN.setText("");
+            
+            //JOptionPane.showMessageDialog(this, "Automata agregado");
+        }
+    }//GEN-LAST:event_btnAgregarAFNActionPerformed
+
+    private void listaAutomatasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaAutomatasValueChanged
+        int indexItemSelected = listaAutomatas.getSelectedIndex();
+        indexSelected = indexItemSelected;
+        if(indexItemSelected >= 0){
+            inExpresionAFN.setText(afns.get(indexItemSelected).expresion);
+            int token = 0;
+            for(Estado e : afns.get(indexItemSelected).estadosAceptacion){
+                token = e.token;
+            }
+            inEntradaAFN.setText("");
+            inTokenAFN.setText( "" + token );
+        }
+    }//GEN-LAST:event_listaAutomatasValueChanged
+
+    private void btnEliminarAFNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAFNActionPerformed
+        inExpresionAFN.setText("");
+        inEntradaAFN.setText("");
+        inTokenAFN.setText("");
+        afns.remove(indexSelected);
+        expresiones.remove(indexSelected);
+        modelListaAutomatas.remove(indexSelected);
+        index -= 1;
+    }//GEN-LAST:event_btnEliminarAFNActionPerformed
+
+    private void btnAnalizarAFNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarAFNActionPerformed
+        AFN_Autom regul = new AFN_Autom( (String) inExpresionAFN.getText() );
+        regul.analizar();
+        boolean isOK = regul.result.AnalizarCadena( (String) inEntradaAFN.getText() );
+        if(isOK){
+            JOptionPane.showMessageDialog(this, "Cadena válida");
+        }else{
+            JOptionPane.showMessageDialog(this, "Cadena NO válida");
+        }
+    }//GEN-LAST:event_btnAnalizarAFNActionPerformed
+
+    private void btnUnionEspecialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnionEspecialActionPerformed
+        afnUnionEspecial.unionEspecial(afns);
+    }//GEN-LAST:event_btnUnionEspecialActionPerformed
+
+    private void btnAFNToAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAFNToAFDActionPerformed
+        afd = new Afd2();
+        afd.AfnToAfd(afnUnionEspecial);
+        afd.imprimirTabla();
+    }//GEN-LAST:event_btnAFNToAFDActionPerformed
+
+    private void btnAnalizarAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalizarAFDActionPerformed
+        Lexic lexic = new Lexic();
+        boolean isOk = lexic.AnalizarLexema( (String) inEntradaAFD.getText() , afd.alfabeto, afd.tabla1);
+        if(isOk){
+            outTokensAFD.setText(lexic.ImprimeTokens(""));
+        }else{
+            outTokensAFD.setText("Cadena NO válida");
+        }
+    }//GEN-LAST:event_btnAnalizarAFDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +392,27 @@ public class InterfazExpresiones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAFNToAFD;
+    private javax.swing.JButton btnAgregarAFN;
+    private javax.swing.JButton btnAnalizarAFD;
+    private javax.swing.JButton btnAnalizarAFN;
+    private javax.swing.JButton btnEliminarAFN;
+    private javax.swing.JButton btnUnionEspecial;
+    private javax.swing.JTextField inEntradaAFD;
+    private javax.swing.JTextField inEntradaAFN;
+    private javax.swing.JTextField inExpresionAFN;
+    private javax.swing.JTextField inTokenAFN;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JLabel labelEntradaAFD;
+    private javax.swing.JLabel labelEntradaAFN;
+    private javax.swing.JLabel labelExpresionAFN;
+    private javax.swing.JLabel labelTituloAnalizadorLexico;
+    private javax.swing.JLabel labelTituloExpresion;
+    private javax.swing.JLabel labelTokenAFN;
+    private javax.swing.JLabel labelTokensAFD;
+    private javax.swing.JList<String> listaAutomatas;
+    private javax.swing.JTextField outTokensAFD;
     // End of variables declaration//GEN-END:variables
 }

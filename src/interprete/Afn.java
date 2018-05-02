@@ -14,12 +14,14 @@ public class Afn {
     HashSet<Estado> estadosAceptacion;
     Estado estadoInicial;
     ArrayList<String> alfabeto;
+    String expresion;
 
     public Afn() {
         this.alfabeto = new ArrayList();
         this.estados = new HashSet();
         this.estadosAceptacion = new HashSet();
         this.estadoInicial = new Estado();
+        this.expresion = new String();
     }
 
     /*public Afn(char c) {
