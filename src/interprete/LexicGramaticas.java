@@ -31,7 +31,7 @@ public class LexicGramaticas
         int longitudLexema=Lexema.length();
         cadenaLexema=Lexema.toCharArray();
         
-        for(i=0; i<longitudLexema; i++)
+        for(i=0; i<longitudLexema-1; i++)
         {
             while (i < longitudLexema &&(cadenaLexema[i] == ' ' || cadenaLexema[i] == '\n')) 
             {
@@ -65,10 +65,15 @@ public class LexicGramaticas
             }
             else if(cadenaLexema[i] == '€')
             {
-                Token=TokensGramaticas.EPSILON;
+                Token=TokensGramaticas.SIMB;
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
             }
         }
+        Stack<String> pila2=new Stack<>();
+        while (!pilaToken.empty()){
+            pila2.push(pilaToken.pop());
+        }
+        pilaToken=pila2;
     }
     
     public boolean PC(char c)
@@ -83,7 +88,7 @@ public class LexicGramaticas
     
     public boolean Simb(char c)
     {
-        return (c>='A' && c<='Z');
+        return ((c>='A' && c<='Z'));
     }
     
     boolean EsDigito(char c)
@@ -103,19 +108,21 @@ public class LexicGramaticas
     
     public void setEdo(Stack<String> nuevaPila)
     {
-        pilaToken=nuevaPila;
+        pilaToken=(Stack<String>) nuevaPila.clone();
     }
     
     public int getToken()
     {
         int TokenReturn;
+        if (pilaToken.empty())
+          return TokensGramaticas.FIN;
         TokenReturn = Integer.parseInt(pilaToken.pop());
         return TokenReturn;
     }
     
     public void returnToken(int TokenReturn)
     {
-        pilaToken.push(String.valueOf(TokenReturn));
+        pilaToken.push(Integer.toString(TokenReturn));
     }
     
     public void ImprimeTokens() 

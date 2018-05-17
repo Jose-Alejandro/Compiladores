@@ -20,5 +20,4 @@ public class TokensGramaticas
     public static int SimboloPrimo = 50;
     public static int EPSILON = 100;
     public static String Espacio = null;
-        
 }
