@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package interprete;
+import java.util.ArrayList;
 import java.util.Stack;
 
 /**
@@ -16,12 +17,17 @@ public class LexicGramaticas
     public String Lexema;
     public int Token;
     Stack<String> pilaToken;
+    public ArrayList<String> NoTerminales; //Simbolos No Terminales
+    boolean FF; //Flecha Flag
     
     public LexicGramaticas (String cadena)
     {
         this.Lexema=cadena;
         this.Token=1000; //Error
         pilaToken = new Stack<>();
+        this.FF = false;
+        this.NoTerminales = new ArrayList<>();
+        this.NoTerminales.clear();
     }
     
     public void EscanerLexic()
@@ -33,15 +39,19 @@ public class LexicGramaticas
         
         for(i=0; i<longitudLexema-1; i++)
         {
+            Lexema="";
             while (i < longitudLexema &&(cadenaLexema[i] == ' ' || cadenaLexema[i] == '\n')) 
             {
                 i++;
             }
             if (EsLetra(cadenaLexema[i])) 
             {
-                Lexema = "";
                 while (EsLetra(cadenaLexema[i]) || EsDigito(cadenaLexema[i]))   
                 {
+                    if(FF == false) //Verificamos si ya pasamos por una Flecha, si no, leemos el Lexema
+                    {
+                        Lexema = Lexema + cadenaLexema[i];
+                    }
                     i++;
                 }
                 Token = TokensGramaticas.SIMB;
@@ -51,6 +61,7 @@ public class LexicGramaticas
             {
                 Token=TokensGramaticas.PC;
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
+                FF=false;
             }
             else if(OR(cadenaLexema[i]))
             {
@@ -62,11 +73,17 @@ public class LexicGramaticas
                 Token=TokensGramaticas.FLECHA;
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
                 i+=1;
+                FF=true;
             }
             else if(cadenaLexema[i] == '€')
             {
                 Token=TokensGramaticas.SIMB;
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
+            }
+            //Reconocer un simbolo no terminal
+            if(!Lexema.isEmpty()) //Si nuestro Lexema no esta vacio, lo agregamos a los NoTerminales.
+            {
+                NoTerminales.add(Lexema);
             }
         }
         Stack<String> pila2=new Stack<>();
@@ -133,5 +150,10 @@ public class LexicGramaticas
         {
             System.out.println(pilaTokencopia.pop() + ",");
         }
+    }
+    
+    public ArrayList<String> GetNoTerminales ()
+    {
+        return NoTerminales;
     }
 }
