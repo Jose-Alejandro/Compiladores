@@ -18,7 +18,9 @@ public class LexicGramaticas
     public int Token;
     Stack<String> pilaToken;
     public ArrayList<String> NoTerminales; //Simbolos No Terminales
+    public ArrayList<ArrayList<String>> ListaReglas; //LIsta de Reglas
     boolean FF; //Flecha Flag
+    String simboloInicial = "";
     
     public LexicGramaticas (String cadena)
     {
@@ -28,6 +30,8 @@ public class LexicGramaticas
         this.FF = false;
         this.NoTerminales = new ArrayList<>();
         this.NoTerminales.clear();
+        this.ListaReglas = new ArrayList();
+        this.ListaReglas.clear();
     }
     
     public void EscanerLexic()
@@ -36,6 +40,7 @@ public class LexicGramaticas
         char cadenaLexema[];
         int longitudLexema=Lexema.length();
         cadenaLexema=Lexema.toCharArray();
+        ArrayList<String> regla = new ArrayList();
         
         for(i=0; i<longitudLexema-1; i++)
         {
@@ -74,6 +79,26 @@ public class LexicGramaticas
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
                 i+=1;
                 FF=true;
+                
+                //Agregar lado derecho a regla
+                String der = "";
+                String nuevo;
+                for (int j = i+2; cadenaLexema[j] != ';'; j++) {
+                    if(cadenaLexema[j] == '|') {
+                        regla.add(1, der);
+                        nuevo = regla.get(0);
+                        ListaReglas.add(regla);
+                        regla = new ArrayList();
+                        regla.add(0, nuevo);
+                        der = "";
+                    } else {
+                        if(cadenaLexema[j] != ' ' || !der.equals("")) {
+                            der += cadenaLexema[j];
+                        }
+                    }
+                }
+                regla.add(1, der);
+                ListaReglas.add(regla);
             }
             else if(cadenaLexema[i] == '€')
             {
@@ -84,6 +109,11 @@ public class LexicGramaticas
             if(!Lexema.isEmpty()) //Si nuestro Lexema no esta vacio, lo agregamos a los NoTerminales.
             {
                 NoTerminales.add(Lexema);
+                regla = new ArrayList();
+                regla.add(0, Lexema);
+                if(simboloInicial.equals("")) {
+                    simboloInicial = Lexema;
+                }
             }
         }
         Stack<String> pila2=new Stack<>();
@@ -155,5 +185,22 @@ public class LexicGramaticas
     public ArrayList<String> GetNoTerminales ()
     {
         return NoTerminales;
+    }
+
+    public ArrayList<ArrayList<String>> getListaReglas() {
+        return ListaReglas;
+    }
+    
+    public void imprimeTabla() {
+        System.out.println("Simbolo Inicial: " + simboloInicial);
+        //System.out.println("Tamaño: " + ListaReglas.size());
+        for (int i = 0; i != ListaReglas.size(); i++) {
+            //System.out.println("Tamaño: " + ListaReglas.get(i).size());
+            for (int j = 0; j != ListaReglas.get(i).size(); j++) {
+                System.out.print(ListaReglas.get(i).get(j) + "-");
+                //System.out.println("Tamaño: " + ListaReglas.get(i).size());
+            }
+            System.out.println();
+        }
     }
 }

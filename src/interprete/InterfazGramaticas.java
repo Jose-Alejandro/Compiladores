@@ -100,9 +100,11 @@ public class InterfazGramaticas extends javax.swing.JFrame {
         String cadena = txtGramaticas.getText();
         Gramatica gram = new Gramatica(cadena);
         if (gram.AnalizarExpr()) {
+            gram.Lexic.imprimeTabla();
             System.out.println("Aceptada");
             JOptionPane.showMessageDialog(this, "Gramática válida");
         } else {
+            gram.Lexic.imprimeTabla();
             System.out.println("Rechazada");
             JOptionPane.showMessageDialog(this, "Gramática RECHAZADA");
         }
