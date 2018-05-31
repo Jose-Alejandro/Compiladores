@@ -6,6 +6,8 @@ import java.util.Stack;
 public class Gramatica {
 
     public LexicGramaticas Lexic;
+    public ArrayList<ArrayList<String>> LL1;
+    public ArrayList<String> terminales;
 
     public Gramatica(String cadena) {
         this.Lexic = new LexicGramaticas(cadena);
@@ -175,5 +177,25 @@ public class Gramatica {
             }
         }
         return simbolos;
+    }
+    
+    public void tablaLL1() {
+        LL1 = new ArrayList();
+        ArrayList inicial = new ArrayList();
+        inicial.add("");
+        for(String s : Lexic.NoTerminales) {
+            inicial.add(s);
+        }
+        //Aquí falta agregar los terminales de la gramática
+        inicial.add("$");
+        LL1.add(inicial);
+        for (int i = 0; i != Lexic.ListaReglas.size(); i++) {
+            if(Lexic.ListaReglas.get(i).get(1).equals("€ ")) {
+                ArrayList first = Follow(Lexic.ListaReglas.get(i).get(0));
+            } else {
+                ArrayList first = First(Lexic.ListaReglas.get(i).get(1));
+            }
+            //aquí falta agregar en inicial, las acciones de la tabla (ArrayList de Strings)
+        }
     }
 }
