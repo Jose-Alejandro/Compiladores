@@ -17,10 +17,13 @@ public class LexicGramaticas
     public String Lexema;
     public int Token;
     Stack<String> pilaToken;
+    public ArrayList<String> Todos; //Simbolos No Terminales
     public ArrayList<String> NoTerminales; //Simbolos No Terminales
+    public ArrayList<String> Terminales; //Simbolos Terminales
     public ArrayList<ArrayList<String>> ListaReglas; //LIsta de Reglas
     boolean FF; //Flecha Flag
     String simboloInicial = "";
+    String terminal = "";
     
     public LexicGramaticas (String cadena)
     {
@@ -30,6 +33,10 @@ public class LexicGramaticas
         this.FF = false;
         this.NoTerminales = new ArrayList<>();
         this.NoTerminales.clear();
+        this.Todos = new ArrayList<>();
+        this.Todos.clear();
+        this.Terminales = new ArrayList<>();
+        this.Terminales.clear();
         this.ListaReglas = new ArrayList();
         this.ListaReglas.clear();
     }
@@ -56,8 +63,14 @@ public class LexicGramaticas
                     if(FF == false) //Verificamos si ya pasamos por una Flecha, si no, leemos el Lexema
                     {
                         Lexema = Lexema + cadenaLexema[i];
+                    } else {
+                        terminal = terminal + cadenaLexema[i];
                     }
                     i++;
+                }
+                if(!terminal.equals("")) {
+                    Todos.add(terminal);
+                    terminal = "";
                 }
                 Token = TokensGramaticas.SIMB;
                 pilaToken.push(Integer.toString(Token)); //Agregamos a la pila el Token.
@@ -108,11 +121,11 @@ public class LexicGramaticas
             //Reconocer un simbolo no terminal
             if(!Lexema.isEmpty()) //Si nuestro Lexema no esta vacio, lo agregamos a los NoTerminales.
             {
-                NoTerminales.add(Lexema);
+                NoTerminales.add(Lexema + " ");
                 regla = new ArrayList();
-                regla.add(0, Lexema);
+                regla.add(0, Lexema + " ");
                 if(simboloInicial.equals("")) {
-                    simboloInicial = Lexema;
+                    simboloInicial = Lexema + " ";
                 }
             }
         }
@@ -201,6 +214,19 @@ public class LexicGramaticas
                 //System.out.println("Tamaño: " + ListaReglas.get(i).size());
             }
             System.out.println();
+        }
+    }
+    
+    public void imprimeTerminales() {
+        
+        for (int i = 0; i != Todos.size(); i++) {
+            if(!NoTerminales.contains(Todos.get(i) + " ") && !Terminales.contains(Todos.get(i))) {
+                Terminales.add(Todos.get(i));
+            }
+        }
+        System.out.println("Terminales");
+        for (int i = 0; i != Terminales.size(); i++) {
+            System.out.println("Terminal " + i + ": " + Terminales.get(i));
         }
     }
 }

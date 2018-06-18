@@ -25,7 +25,7 @@ public class InterfazGramaticas extends javax.swing.JFrame {
         String gramatica = "";
         gramatica += "G -> LR ; \n"
                 + "LR -> R PC LRP ; \n"
-                + "LRP -> R PC LRP | €; \n"
+                + "LRP -> R PC LRP | € ; \n"
                 + "R -> LI FLECHA LLD ; \n"
                 + "LI -> S ; \n"
                 + "LLD -> LD LLDP ; \n"
@@ -101,7 +101,9 @@ public class InterfazGramaticas extends javax.swing.JFrame {
         Gramatica gram = new Gramatica(cadena);
         if (gram.AnalizarExpr()) {
             gram.Lexic.imprimeTabla();
+            gram.Lexic.imprimeTerminales();
             System.out.println("Aceptada");
+            gram.tablaLL1();
             JOptionPane.showMessageDialog(this, "Gramática válida");
         } else {
             gram.Lexic.imprimeTabla();
